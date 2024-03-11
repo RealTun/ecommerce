@@ -79,24 +79,26 @@
                 <div class="col-md-8">
                     <div class="content row">
                         <div class="col-sm-6">
-                            <div class="register-block p-2">
-                                <h4 class="title">KHÁCH HÀNG MỚI</h4>
-                                <p class="mb-5">Bằng cách tạo tài khoản bạn sẽ có thể mua sắm nhanh hơn và nhiều chương trình mua sắm ưu
+                            <div class="register-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
+                                <h4 class="title m-0">KHÁCH HÀNG MỚI</h4>
+                                <p class="m-0 flex-grow-1">Bằng cách tạo tài khoản bạn sẽ có thể mua sắm nhanh hơn và nhiều chương trình mua sắm ưu
                                     đãi hơn dành riêng cho khách hàng thân thiết.</p>
                                 <a href="" class="btn btn-primary btn-register">Đăng ký</a>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="login-block p-2">
-                                <h2 class="title">Đăng nhập tài khoản</h2>
-                                <div class="form-group mb-2">
-                                    <input type="text" name="telephone" value="" placeholder="Số điện thoại:"
-                                        id="input-telephone" class="form-control">
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="password" name="password" value="" placeholder="Mật khẩu:"
-                                        id="input-password" class="form-control mb-2">
-                                    <div><a href="tel:0868733868" target="_top">Quên mật khẩu</a></div>
+                            <div class="login-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
+                                <h2 class="title m-0">Đăng nhập tài khoản</h2>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="form-group">
+                                        <input type="text" name="telephone" value="" placeholder="Số điện thoại:"
+                                            id="input-telephone" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" value="" placeholder="Mật khẩu:"
+                                            id="input-password" class="form-control">
+                                        <div><a href="tel:0868733868" target="_top">Quên mật khẩu</a></div>
+                                    </div>
                                 </div>
                                 <a href="" class="btn btn-primary btn-login">Đăng nhập</a>
                             </div>
