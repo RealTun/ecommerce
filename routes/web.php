@@ -7,13 +7,21 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\web\AccountController;
 
-Route::get('/login', [AccountController::class, 'index'])->name('web.login');
+Route::get('/login', [AccountController::class, 'login'])->name('web.login');
+Route::post('/account/checklogin', [AccountController::class, 'checkLogin'])->name('web.checklogin');
+Route::post('/account/logout', [AccountController::class, 'logout'])->name('web.logout');
+
+Route::get('/register', [AccountController::class, 'register'])->name('web.register');
+
+Route::post('/account/store', [AccountController::class, 'storeAccount'])->name('web.storeAccount');
+
+Route::get('/account/forgot-password', [AccountController::class, ''])->name('web.forgotpassword');
 
 Route::get('/', [WebController::class, 'index'])->name('web.home');
 
-Route::get('/{slug}', [WebController::class, 'brandIndex'])->name('web.brandIndex');
+Route::get('/thoi-trang/{slug}', [WebController::class, 'brandIndex'])->name('web.brandIndex');
 
-Route::get('/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
+Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
 
 
 // process cart

@@ -71,6 +71,11 @@
     <div class="container slide-banner mb-4">
         <div class="banner-top py-4 px-5">
             <div class="row">
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible" style="font-size: 14px">
+                        <i class="fa fa-exclamation-circle"></i> Lỗi: {{session('error')}}
+                    </div>
+                @endif
                 <div class="col-md-2 ps-0">
                     <a href="" class="text-start d-block">
                         <img class="img-fluid" src="{{ asset('images/banner/slide-trai-20-300x500h.png') }}" alt="left_slide">
@@ -83,24 +88,28 @@
                                 <h4 class="title m-0">KHÁCH HÀNG MỚI</h4>
                                 <p class="m-0 flex-grow-1">Bằng cách tạo tài khoản bạn sẽ có thể mua sắm nhanh hơn và nhiều chương trình mua sắm ưu
                                     đãi hơn dành riêng cho khách hàng thân thiết.</p>
-                                <a href="" class="btn btn-primary btn-register">Đăng ký</a>
+                                <a href="{{route('web.register')}}" class="btn btn-primary btn-register">ĐĂNG KÝ</a>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="login-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
                                 <h2 class="title m-0">Đăng nhập tài khoản</h2>
                                 <div class="d-flex flex-column gap-2">
-                                    <div class="form-group">
-                                        <input type="text" name="telephone" value="" placeholder="Số điện thoại:"
-                                            id="input-telephone" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" value="" placeholder="Mật khẩu:"
-                                            id="input-password" class="form-control">
-                                        <div><a href="tel:0868733868" target="_top">Quên mật khẩu</a></div>
-                                    </div>
+                                    <form action="{{route('web.checklogin')}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="email" name="email" placeholder="Email:"
+                                                id="input-email" class="form-control">
+                                        </div>
+                                        <div class="form-group mt-2 mb-2">
+                                            <input type="password" name="password" placeholder="Mật khẩu:"
+                                                id="input-password" class="form-control">
+                                            <div class="mt-2"><a href="{{route('web.forgotpassword')}}" target="_top">Quên mật khẩu</a></div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-login">ĐĂNG NHẬP</button>
+                                    </form>
                                 </div>
-                                <a href="" class="btn btn-primary btn-login">Đăng nhập</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -119,7 +128,9 @@
 @push('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
-
+            setTimeout(function() {
+                $('.alert-danger').fadeOut();
+            }, 2000); // Adjust the duration (in milliseconds) as needed
         });
     </script>
 @endpush

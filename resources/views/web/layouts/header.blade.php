@@ -112,9 +112,16 @@
         <div class="cart-user d-flex justify-content-end" style="flex: 1;">
             <a href="{{route('web.login')}}" class="d-flex text-white text-decoration-none mx-4">
                 <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
-                <div>
-                    <span style="font-size: 12px">Tài khoản</span>
-                    <div style="font-size: 11px">Đăng nhập/Đăng ký</div>
+                <div>            
+                    @if (Auth::check())
+                        <div>
+                            <div class="text-start" style="font-size: 14px">Xin chào {{Auth::user()->name}}</div>
+                            <a class="text-decoration-none" href="{{route('web.logout')}}">Đăng xuất</a>
+                        </div>
+                    @else
+                        <span style="font-size: 12px">Tài khoản</span>
+                        <div style="font-size: 11px">Đăng nhập/Đăng ký</div>
+                    @endif
                 </div>
             </a>
             <div class="shopping-cart">
