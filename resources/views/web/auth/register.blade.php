@@ -73,29 +73,32 @@
                 <div class="col-md-8">
                     <div class="content row">
                         <div class="col-sm-12">
-                            <div class="login-block p-2 d-flex flex-column gap-2 justify-content-between h-100 pt-0">
-                                <h4 class="title m-0 text-center">THÔNG TIN ĐĂNG KÝ</h4>
-                                <div class="form-group">
-                                    <input type="text" name="name" value="" placeholder="Họ và tên:"
-                                        id="input-name" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="telephone" value="" placeholder="Số điện thoại:"
-                                        id="input-telephone" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" value="" placeholder="Email:"
-                                        id="input-email" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" value="" placeholder="Mật khẩu:"
-                                        id="input-password" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="cf-password" value="" placeholder="Nhập lại mật khẩu:"
-                                        id="input-cfpassword" class="form-control">
-                                </div>
-                                <a href="{{route('web.storeAccount')}}" class="btn btn-primary btn-register mt-3">ĐĂNG KÝ</a>
+                            <div class="login-block p-2 pt-0">
+                                <h4 class="title m-0 text-center mb-3">THÔNG TIN ĐĂNG KÝ</h4>
+                                <form action="{{route('web.storeAccount')}}" method="post" class="d-flex flex-column gap-2 justify-content-between h-100">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="text" name="name" placeholder="Họ và tên:"
+                                            id="input-name" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="telephone" placeholder="Số điện thoại:"
+                                            id="input-telephone" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" placeholder="Email:"
+                                            id="input-email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" placeholder="Mật khẩu:"
+                                            id="input-password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="cf-password" placeholder="Nhập lại mật khẩu:"
+                                            id="input-cfpassword" class="form-control">
+                                    </div>
+                                    <a type="submit" href="{{route('web.storeAccount')}}" class="btn btn-primary btn-register mt-3">ĐĂNG KÝ</a>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -114,8 +114,8 @@
                 <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
                 <div>            
                     @if (Auth::check())
-                        <div>
-                            <div class="text-start" style="font-size: 14px">Xin chào {{Auth::user()->name}}</div>
+                        <div class="d-flex flex-column">
+                            <div style="font-size: 14px">Xin chào {{Auth::user()->name}}</div>
                             <a class="text-decoration-none" href="{{route('web.logout')}}">Đăng xuất</a>
                         </div>
                     @else

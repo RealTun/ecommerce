@@ -9,7 +9,7 @@ use App\Http\Controllers\web\AccountController;
 
 Route::get('/login', [AccountController::class, 'login'])->name('web.login');
 Route::post('/account/checklogin', [AccountController::class, 'checkLogin'])->name('web.checklogin');
-Route::post('/account/logout', [AccountController::class, 'logout'])->name('web.logout');
+Route::get('/account/logout', [AccountController::class, 'logout'])->name('web.logout');
 
 Route::get('/register', [AccountController::class, 'register'])->name('web.register');
 

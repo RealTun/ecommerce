@@ -32,8 +32,14 @@ class AccountController extends Controller
         return view('web.auth.register');
     }
 
-    public function storeAccount(){
-
+    public function storeAccount(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'telephone' => 'required|numeric',
+            'email' => 'required',
+            'password' => 'required',
+            'cf-password' => 'required',
+        ]);
     }
 
     public function forgotPassword(){
