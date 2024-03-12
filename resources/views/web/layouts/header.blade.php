@@ -78,16 +78,17 @@
         padding: 10px 0px;
     }
 
-    .td-name{
+    .td-name {
         max-width: 150px;
     }
 
-    .td-remove button{
+    .td-remove button {
         border: none;
         color: rgba(226, 41, 61, 1);
-        background-color: white; 
+        background-color: white;
     }
-    .td-remove button:hover{
+
+    .td-remove button:hover {
         color: rgba(80, 173, 85, 1);
     }
 </style>
@@ -100,7 +101,7 @@
                 <img src="{{ asset('images/logo/logo_ms-565x195.png') }}" alt="shose.vn" height="45">
             </a>
         </div>
-        <div class="input-search" style="flex: 1;">
+        <div class="input-search" style="flex: 2;">
             <div class="input-group">
                 <input type="text" style="font-size: 13px; padding: 10px 10px;" class="form-control"
                     id="input_search" placeholder="Tìm kiếm sản phẩm.....">
@@ -109,14 +110,14 @@
                 </button>
             </div>
         </div>
-        <div class="cart-user d-flex justify-content-end" style="flex: 1;">
-            <a href="{{route('web.login')}}" class="d-flex text-white text-decoration-none mx-4">
+        <div class="cart-user d-flex justify-content-end gap-2" style="flex: 1;">
+            <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
                 <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
-                <div>            
+                <div>
                     @if (Auth::check())
-                        <div class="d-flex flex-column">
-                            <div style="font-size: 14px">Xin chào {{Auth::user()->name}}</div>
-                            <a class="text-decoration-none" href="{{route('web.logout')}}">Đăng xuất</a>
+                        <div class="d-flex flex-column justify-content-start">
+                            <span style="font-size: 14px">Xin chào {{ Auth::user()->name }}</span>
+                            <a class="text-decoration-none" href="{{ route('web.logout') }}">Đăng xuất</a>
                         </div>
                     @else
                         <span style="font-size: 12px">Tài khoản</span>
@@ -170,7 +171,8 @@
                             Puma</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-new-balance') }}">Giày
+                        <a class="nav-link text-white fw-bold"
+                            href="{{ route('web.brandIndex', 'giay-new-balance') }}">Giày
                             New Balance</a>
                     </li>
                     <li class="nav-item">
@@ -178,7 +180,8 @@
                             Vans</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-converse') }}">Giày
+                        <a class="nav-link text-white fw-bold"
+                            href="{{ route('web.brandIndex', 'giay-converse') }}">Giày
                             Converse</a>
                     </li>
                     <li class="nav-item">

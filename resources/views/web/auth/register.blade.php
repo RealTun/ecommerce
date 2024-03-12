@@ -1,16 +1,9 @@
 @extends('web.layouts.master')
 
-@section('title', 'Đăng nhập tài khoản')
+@section('title', 'Đăng ký tài khoản')
 
 @push('css')
     <style>
-        input[type="text"],
-        input[type="password"] {
-            outline: none;
-            box-shadow: none !important;
-            border: 1px solid #ccc !important;
-        }
-
         .title {
             font-weight: 400;
             font-size: 16px;
@@ -26,7 +19,7 @@
         .register-block p {
             font-weight: 400;
             font-size: 14px;
-            color: rgba(30, 46, 78, 1);
+            color: #1e2e4e;
         }
 
         .login-block .form-control {
@@ -38,7 +31,7 @@
             border-width: 1px !important;
             border-style: solid !important;
             border-radius: 0;
-            border-color: rgba(221, 221, 221, 1) !important;
+            border-color: rgba(221, 221, 221, 1);
             max-width: 1000px;
             height: 38px;
         }
@@ -54,7 +47,7 @@
         }
 
         .btn-register:hover,
-        .btn-login:hover{
+        .btn-login:hover {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
     </style>
@@ -75,29 +68,51 @@
                         <div class="col-sm-12">
                             <div class="login-block p-2 pt-0">
                                 <h4 class="title m-0 text-center mb-3">THÔNG TIN ĐĂNG KÝ</h4>
-                                <form action="{{route('web.storeAccount')}}" method="post" class="d-flex flex-column gap-2 justify-content-between h-100">
+                                <form method="POST" action="{{ route('web.storeAccount') }}"
+                                    class="d-flex flex-column gap-2 justify-content-between h-100" id="registerForm">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="name" placeholder="Họ và tên:"
-                                            id="input-name" class="form-control">
+                                        <input type="text" name="name" placeholder="Họ và tên:" id="input-name"
+                                            class="form-control{{ $errors->has('name') ? ' border-danger' : '' }}"
+                                            value="{{ old('name') }}">
+                                        @if ($errors->has('name'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('name') }}
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="telephone" placeholder="Số điện thoại:"
-                                            id="input-telephone" class="form-control">
+                                            id="input-telephone"
+                                            class="form-control{{ $errors->has('telephone') ? ' border-danger' : '' }}"
+                                            value="{{ old('telephone') }}">
+                                        @if ($errors->has('telephone'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('telephone') }}
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email:"
-                                            id="input-email" class="form-control">
+                                        <input type="email" name="email" placeholder="Email:" id="input-email"
+                                            class="form-control{{ $errors->has('email') ? ' border-danger' : '' }}"
+                                            value="{{ old('email') }}">
+                                        @if ($errors->has('email'))
+                                            <span class="text-danger">
+                                                {{ $errors->first('email') }}
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" placeholder="Mật khẩu:"
-                                            id="input-password" class="form-control">
+                                        <input type="password" name="password" placeholder="Mật khẩu:" id="input-password"
+                                            class="form-control">
+                                        <span class="text-danger d-none"></span>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="cf-password" placeholder="Nhập lại mật khẩu:"
                                             id="input-cfpassword" class="form-control">
+                                        <span class="text-danger d-none"></span>
                                     </div>
-                                    <a type="submit" href="{{route('web.storeAccount')}}" class="btn btn-primary btn-register mt-3">ĐĂNG KÝ</a>
+                                    <button type="submit" class="btn btn-primary btn-register mt-3">ĐĂNG KÝ</button>
                                 </form>
                             </div>
                         </div>
@@ -117,7 +132,19 @@
 @push('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
-
+            $("#registerForm").submit(function(event) {
+                event.preventDefault();
+                let passwordInput = $("#input-password");
+                let cfPasswordInput = $("#input-cfpassword");
+                if (passwordInput.val() != cfPasswordInput.val()) {
+                    cfPasswordInput.next().removeClass('d-none').text('Mật khẩu không trùng khớp');
+                    cfPasswordInput.addClass('border-danger');
+                } else {
+                    cfPasswordInput.next().addClass('d-none').text('');
+                    cfPasswordInput.removeClass('border-danger');
+                    this.submit();
+                }
+            })
         });
     </script>
 @endpush

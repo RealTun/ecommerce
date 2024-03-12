@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{route('admin.home.index')}}">Quản trị </a>
+        <a class="navbar-brand" href="{{ route('admin.home.index') }}">Quản trị </a>
     </div>
     <!-- /.navbar-header -->
 
@@ -22,7 +22,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="{{route('admin.auth.logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="{{ route('admin.auth.logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -46,16 +46,16 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="{{route('admin.home.index')}}"><i class="fa fa-dashboard fa-fw"></i> Trang chính</a>
+                    <a href="{{ route('admin.home.index') }}"><i class="fa fa-dashboard fa-fw"></i> Trang chính</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Sản phẩm<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{route('admin.products.index')}}">Danh sách sản phẩm</a>
+                            <a href="{{ route('admin.products.index') }}">Danh sách sản phẩm</a>
                         </li>
                         <li>
-                            <a href="{{route('admin.products.create')}}">Thêm sản phẩm</a>
+                            <a href="{{ route('admin.products.create') }}">Thêm sản phẩm</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
