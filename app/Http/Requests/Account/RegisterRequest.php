@@ -36,7 +36,7 @@ class RegisterRequest extends FormRequest
       ],
       'password' => [
         'required',
-        'regex:/^.*(?=.{4,20})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x]).*$/',
+        'regex:/^.*(?=.{4,20}).*$/',
       ]
     ];
   }
