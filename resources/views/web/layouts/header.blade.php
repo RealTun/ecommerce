@@ -201,7 +201,7 @@
                         <a class="nav-link text-white fw-bold" href="#">Phụ kiện</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="#">
+                        <a class="nav-link text-white fw-bold" href="{{route('web.contact')}}">
                             <i class="bi bi-envelope"></i>
                             Liên hệ
                         </a>

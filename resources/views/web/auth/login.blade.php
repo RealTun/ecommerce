@@ -76,6 +76,11 @@
                         <i class="fa fa-exclamation-circle"></i> Lỗi: {{session('error')}}
                     </div>
                 @endif
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible" style="font-size: 14px">
+                        <i class="fa-solid fa-circle-check"></i> {{session('success')}}
+                    </div>
+                @endif
                 <div class="col-md-2 ps-0">
                     <a href="" class="text-start d-block">
                         <img class="img-fluid" src="{{ asset('images/banner/slide-trai-20-300x500h.png') }}" alt="left_slide">
@@ -130,7 +135,8 @@
         $(document).ready(function() {
             setTimeout(function() {
                 $('.alert-danger').fadeOut();
-            }, 2000); // Adjust the duration (in milliseconds) as needed
+                $('.alert-success').fadeOut();
+            }, 3000); // Adjust the duration (in milliseconds) as needed
         });
     </script>
 @endpush

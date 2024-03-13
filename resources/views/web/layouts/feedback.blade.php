@@ -47,6 +47,18 @@
             height: 100%;
         }
 
+        .feedback {
+            max-height: 5em;
+            /* Adjust the height as needed to limit the number of lines */
+            line-height: 1.2em;
+            /* Adjust the line height as needed */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4
+        }
+
         .detail-feedback {
             font-size: 16px;
             text-align: center;
@@ -93,19 +105,67 @@
             <div class="swiper mt-4">
                 <div class="slide-container">
                     <div class="card-wrapper swiper-wrapper">
-                        @for ($i = 0; $i < 5; $i++)
-                            <div class="card swiper-slide">
-                                <div class="image-box">
-                                    <img src="{{ asset('images/customer/IMG_1816-500x500.jpg') }}" alt="">
-                                </div>
-                                <!--<img src="images/profile/profile1.jpg" alt="" />-->
-                                <div class="detail-feedback mt-3">
-                                    <div class="feedback-">Myshoes.vn bán hàng chính hãng, giá rất ok, tôi đã mua một
-                                        đôi giày chạy bộ của Nike đi rất êm và thích.</div>
-                                    <div class="name-cus fst-italic fw-semibold mt-5">- Anh Nam -</div>
-                                </div>
+                        <div class="card swiper-slide">
+                            <div class="image-box">
+                                <img src="{{ asset('images/customer/IMG_1816-500x500.jpg') }}" alt="">
                             </div>
-                        @endfor
+                            <!--<img src="images/profile/profile1.jpg" alt="" />-->
+                            <div class="detail-feedback mt-3">
+                                <div class="feedback">Myshoes.vn bán hàng chính hãng, giá rất ok, tôi đã mua một
+                                    đôi giày chạy bộ của Nike đi rất êm và thích.</div>
+                                <div class="name-cus fst-italic fw-semibold mt-5">- Anh Nam -</div>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-box">
+                                <img src="https://myshoes.vn/image/cache/catalog/lookbook/IMG_1061-500x500.jpg"
+                                    alt="">
+                            </div>
+                            <!--<img src="images/profile/profile1.jpg" alt="" />-->
+                            <div class="detail-feedback mt-3">
+                                <div class="feedback">Mua hàng của Myshoes.vn thì rất yên tâm rồi, mình mua luôn 2 đôi
+                                    vì nhiều mẫu đẹp quá! Sẽ ủng hộ shop thường xuyên.</div>
+                                <div class="name-cus fst-italic fw-semibold mt-5">- Anh Huy Hùng -</div>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-box">
+                                <img src="https://myshoes.vn/image/cache/catalog/lookbook/IMG_1064-500x500.jpg"
+                                    alt="">
+                            </div>
+                            <!--<img src="images/profile/profile1.jpg" alt="" />-->
+                            <div class="detail-feedback mt-3">
+                                <div class="feedback">Tìm một đôi giày ưng ý không hề dễ dàng, nhưng từ khi biết đến
+                                    Myshoes.vn thì hoàn toàn tin tưởng, nhiều mẫu đẹp và đã chọn được một em Adidas ưng
+                                    ý!</div>
+                                <div class="name-cus fst-italic fw-semibold mt-5">- Anh Đức -</div>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-box">
+                                <img src="https://myshoes.vn/image/cache/catalog/lookbook/IMG_0955-500x500.jpg"
+                                    alt="">
+                            </div>
+                            <!--<img src="images/profile/profile1.jpg" alt="" />-->
+                            <div class="detail-feedback mt-3">
+                                <div class="feedback">Mới mua combo chăm sóc giày của Myshoes sử dụng rất tốt, vệ sinh
+                                    giày siêu sạch, xịt nano rất hiệu quả khi đi trời mưa.</div>
+                                <div class="name-cus fst-italic fw-semibold mt-5">- Anh Thanh -</div>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-box">
+                                <img src="https://myshoes.vn/image/cache/catalog/lookbook/IMG_181711-500x500.jpg"
+                                    alt="">
+                            </div>
+                            <!--<img src="images/profile/profile1.jpg" alt="" />-->
+                            <div class="detail-feedback mt-3">
+                                <div class="feedback">Tôi đã mua cho cả 2 vợ chồng giày của Myshoes.vn và thật sự nó vô
+                                    cùng chất lượng. Hàng đảm bảo chính hãng 100% và chính sách bảo hành rất yên tâm ạ.
+                                    Cảm ơn Myshoes.vn!</div>
+                                <div class="name-cus fst-italic fw-semibold mt-5">- Chị Thanh Thuỷ -</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-button-next swiper-navBtn"></div>
