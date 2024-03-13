@@ -43,10 +43,7 @@ class AccountController extends Controller
     $account = new User();
     $account->fill($request->validated());
     $account->save();
-    return redirect()->route('web.login')->with([
-      'type' => 'success',
-      'message' => 'Tạo tài khoản thành công'
-    ]);
+    return redirect()->route('web.login')->with('success', 'Đăng ký tài khoản thành công!');
   }
 
   public function forgotPassword()
