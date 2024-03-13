@@ -19,46 +19,94 @@
             display: block;
         }
 
-        .info-block div{
+        .info-block div {
             font-size: 13px;
             color: rgba(139, 145, 152, 1);
             display: block;
         }
 
-        .content-left{
+        .content-left {
             background: rgba(238, 238, 238, 1);
-            padding: 20px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .location-block, 
+        .location-block,
         .phone-block,
-        .time-block{
+        .time-block {
             display: flex;
             width: 100%;
             padding: 10px 10px 15px;
         }
 
-        .location-block, 
-        .phone-block{
+        .location-block,
+        .phone-block {
             border-width: 0;
             border-bottom-width: 1px;
             border-style: solid;
             border-color: rgba(221, 221, 221, 1);
         }
 
-        .content-left i{
+        .content-left i {
             margin-right: 15px;
             width: 10%;
             display: flex;
             justify-content: center;
-            align-items:center;
+            align-items: center;
         }
 
-        
-        
+        .contact-block .title {
+            font-size: 22px;
+            font-weight: 700;
+            border-width: 0px;
+            padding: 0px;
+            margin-bottom: 20px;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: initial;
+        }
+
+        .contact-block .form-control {
+            font-family: 'Noto Sans' !important;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            color: rgba(51, 51, 51, 1) !important;
+            background: rgba(255, 255, 255, 1) !important;
+            border-width: 1px !important;
+            border-style: solid !important;
+            border-radius: 0;
+            border-color: rgba(221, 221, 221, 1) !important;
+            max-width: 1000px;
+            height: 38px;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        .contact-block .form-control:focus{
+            box-shadow: 10px #ccc !important;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+        }
+
+        .btn-send{
+            background: rgba(15, 58, 141, 1);
+            font-weight: 400 !important;
+            font-size: 13px !important;
+            padding: 10px 10px;
+            width: 100%;
+            border-color: rgba(15, 58, 141, 1);
+            margin-top: 10px;
+            border-radius: 0;
+        }
+
+        .btn-send:hover{
+            background-color: rgba(15, 58, 141, 1);
+            filter: brightness(120%);
+        }
     </style>
 @endpush
 
@@ -109,7 +157,26 @@
                 </div>
                 <div class="col-md-8">
                     <div class="content-right">
-
+                        <div class="contact-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
+                            <h2 class="title m-0">Myshoes.vn sẵn sàng lắng nghe bạn!</h2>
+                            <div class="d-flex flex-column gap-2">
+                                <form action="" method="post" class="">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="text" name="email" placeholder="Họ và tên" id="input-name"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group mt-2 mb-2">
+                                        <input type="email" name="password" placeholder="Email" id="input-password"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group mt-2 mb-2">
+                                        <textarea class="form-control" id="input-contact" name="content-contact" rows="5" placeholder="Thông tin"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-send">XÁC NHẬN</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,6 +191,20 @@
                 $('.alert-danger').fadeOut();
                 $('.alert-success').fadeOut();
             }, 3000); // Adjust the duration (in milliseconds) as needed
+
+            $("#registerForm").submit(function(event) {
+                event.preventDefault();
+                let passwordInput = $("#input-password");
+                let cfPasswordInput = $("#input-cfpassword");
+                if (passwordInput.val() != cfPasswordInput.val()) {
+                    cfPasswordInput.next().removeClass('d-none').text('Mật khẩu không trùng khớp');
+                    cfPasswordInput.addClass('border-danger');
+                } else {
+                    cfPasswordInput.next().addClass('d-none').text('');
+                    cfPasswordInput.removeClass('border-danger');
+                    this.submit();
+                }
+            })
         });
     </script>
 @endpush

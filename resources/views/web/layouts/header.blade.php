@@ -4,7 +4,6 @@
         font-weight: 400;
     }
 
-    textarea,
     #btn_search,
     #input_mailsub {
         outline: none;
