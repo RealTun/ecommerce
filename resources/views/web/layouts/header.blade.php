@@ -12,6 +12,10 @@
         border: 0px solid #ccc !important;
     }
 
+    #btn_search:hover {
+        color: rgba(204, 4, 26, 1) !important;
+    }
+
     .navbar-nav-scroll li:first-child a {
         padding-left: 0 !important
     }
@@ -91,6 +95,12 @@
     .td-remove button:hover {
         color: rgba(80, 173, 85, 1);
     }
+
+    #input_search {
+        outline: none;
+        box-shadow: none;
+        border: none
+    }
 </style>
 
 <div class="container p-0">
@@ -111,22 +121,25 @@
             </div>
         </div>
         <div class="cart-user d-flex justify-content-end gap-2" style="flex: 1;">
-            <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
-                <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
-                <div>
-                    @if (Auth::check())
-                        <div class="d-flex flex-column justify-content-start">
-                            <span style="font-size: 14px">Xin chào {{ Auth::user()->name }}</span>
-                            <a class="text-decoration-none" href="{{ route('web.logout') }}">Đăng xuất</a>
-                        </div>
-                    @else
+            @if (Auth::check())
+                <a href="{{ route('web.logout') }}" class="d-flex text-white text-decoration-none">
+                    <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
+                    <div style="min-width: 110px;">
+                        <span style="font-size: 12px">Xin chào {{ Auth::user()->name }}</span>
+                        <div style="font-size: 11px">Đăng xuất</div>
+                    </div>
+                </a>
+            @else
+                <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
+                    <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
+                    <div style="min-width: 110px;">
                         <span style="font-size: 12px">Tài khoản</span>
                         <div style="font-size: 11px">Đăng nhập/Đăng ký</div>
-                    @endif
-                </div>
-            </a>
+                    </div>
+                </a>
+            @endif
             <div class="shopping-cart">
-                <i class="bi bi-cart text-white" style="font-size: 1.8rem"></i>
+                <i class="bi bi-bag text-white" style="font-size: 1.8rem"></i>
                 <span class="cart-item text-white" id="count_product">0</span>
                 <div class="dropdown-menu j-dropdown" id="cart-content">
                     <ul>
@@ -136,7 +149,7 @@
                         <li class="cart-product d-none">
                             <table class="table">
                                 <tbody></tbody>
-                                {{-- <tr>
+                                <tr>
                                     <td class="text-center td-image">1</td>
                                     <td class="text-start td-name">2</td>
                                     <td class="text-end td-qty">3</td>
@@ -146,7 +159,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </button>
                                     </td>
-                                </tr> --}}
+                                </tr>
                             </table>
                         </li>
                     </ul>
