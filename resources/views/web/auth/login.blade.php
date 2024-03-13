@@ -43,7 +43,7 @@
             height: 38px;
         }
 
-        .form-group a{
+        .form-group a {
             color: rgba(58, 88, 173, 1);
             text-decoration: underline;
             font-size: 14px;
@@ -60,7 +60,7 @@
         }
 
         .btn-register:hover,
-        .btn-login:hover{
+        .btn-login:hover {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
     </style>
@@ -73,17 +73,18 @@
             <div class="row">
                 @if (session('error'))
                     <div class="alert alert-danger alert-dismissible" style="font-size: 14px">
-                        <i class="fa fa-exclamation-circle"></i> Lỗi: {{session('error')}}
+                        <i class="fa fa-exclamation-circle"></i> Lỗi: {{ session('error') }}
                     </div>
                 @endif
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible" style="font-size: 14px">
-                        <i class="fa-solid fa-circle-check"></i> {{session('success')}}
+                        <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
                     </div>
                 @endif
                 <div class="col-md-2 ps-0">
                     <a href="" class="text-start d-block">
-                        <img class="img-fluid" src="{{ asset('images/banner/slide-trai-20-300x500h.png') }}" alt="left_slide">
+                        <img class="img-fluid" src="{{ asset('images/banner/slide-trai-20-300x500h.png') }}"
+                            alt="left_slide">
                     </a>
                 </div>
                 <div class="col-md-8">
@@ -91,30 +92,32 @@
                         <div class="col-sm-6">
                             <div class="register-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
                                 <h4 class="title m-0">KHÁCH HÀNG MỚI</h4>
-                                <p class="m-0 flex-grow-1">Bằng cách tạo tài khoản bạn sẽ có thể mua sắm nhanh hơn và nhiều chương trình mua sắm ưu
+                                <p class="m-0 flex-grow-1">Bằng cách tạo tài khoản bạn sẽ có thể mua sắm nhanh hơn và nhiều
+                                    chương trình mua sắm ưu
                                     đãi hơn dành riêng cho khách hàng thân thiết.</p>
-                                <a href="{{route('web.register')}}" class="btn btn-primary btn-register">ĐĂNG KÝ</a>
+                                <a href="{{ route('web.register') }}" class="btn btn-primary btn-register">ĐĂNG KÝ</a>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="login-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
                                 <h2 class="title m-0">Đăng nhập tài khoản</h2>
                                 <div class="d-flex flex-column gap-2">
-                                    <form action="{{route('web.checklogin')}}" method="post">
+                                    <form action="{{ route('web.checklogin') }}" method="post">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email" placeholder="Email:"
-                                                id="input-email" class="form-control">
+                                            <input type="email" name="email" placeholder="Email:" id="input-email"
+                                                class="form-control">
                                         </div>
                                         <div class="form-group mt-2 mb-2">
                                             <input type="password" name="password" placeholder="Mật khẩu:"
                                                 id="input-password" class="form-control">
-                                            <div class="mt-2"><a href="{{route('web.forgotpassword')}}" target="_top">Quên mật khẩu</a></div>
+                                            <div class="mt-2"><a href="{{ route('web.forgotpassword') }}"
+                                                    target="_top">Quên mật khẩu</a></div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-login">ĐĂNG NHẬP</button>
                                     </form>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 <style>
     body {
-        font-family: 'Noto Sans';
+        font-family: 'Noto Sans' !important;
         font-weight: 400;
     }
 
@@ -101,6 +101,34 @@
         box-shadow: none;
         border: none
     }
+
+    .cart-product table td {
+        font-size: 13px;
+    }
+
+    .cart-product table a {
+        color: #3a58ad;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .btn.btn-outline-dark:hover {
+        background-color: #fff;
+        color: #000;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .btn.btn-pay {
+        background-color: #CC041A !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-width: 2px;
+        color: #ffffff;
+    }
+
+    .btn.btn-pay:hover {
+        filter: contrast(150%);
+        transition: 0.3s ease filter;
+    }
 </style>
 
 <div class="container p-0">
@@ -146,21 +174,20 @@
                         <li class="cart-empty">
                             <p class="text-center">Không có sản phẩm trong giỏ hàng!</p>
                         </li>
-                        <li class="cart-product d-none">
-                            <table class="table">
+                        <li class="cart-product">
+                            <table class="table mb-2 px-2">
                                 <tbody></tbody>
-                                <tr>
-                                    <td class="text-center td-image">1</td>
-                                    <td class="text-start td-name">2</td>
-                                    <td class="text-end td-qty">3</td>
-                                    <td class="text-end td-total">4</td>
-                                    <td class="text-center td-remove">5
-                                        <button type="button" title="Loại bỏ" class="cart-remove">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </td>
-                                </tr>
                             </table>
+                        </li>
+                        <li class="card-btn-wrapper">
+                            <div class="d-flex align-items-center justify-content-center gap-3">
+                                <button class="btn btn-outline-dark rounded-0 text-uppercase fw-medium"
+                                    style="font-size: 14px;">Xem giỏ
+                                    hàng</button>
+                                <button class="btn btn-pay rounded-0 text-uppercase fw-medium"
+                                    style="font-size: 14px;">Thanh
+                                    toán</button>
+                            </div>
                         </li>
                     </ul>
                 </div>

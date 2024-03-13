@@ -418,7 +418,7 @@
 @endsection
 
 @push('javascript')
-    <script src="{{asset('js/cart.js')}}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             // images

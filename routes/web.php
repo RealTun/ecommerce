@@ -11,7 +11,7 @@ Route::get('/login', [AccountController::class, 'login'])->name('web.login');
 Route::get('/register', [AccountController::class, 'register'])->name('web.register');
 Route::get('/account/logout', [AccountController::class, 'logout'])->name('web.logout');
 Route::post('/account/store', [AccountController::class, 'storeAccount'])->name('web.storeAccount');
-Route::post('/account/checklogin', [AccountController::class, 'checkLogin'])->name('web.checklogin');
+Route::post('/', [AccountController::class, 'checkLogin'])->name('web.checklogin');
 Route::get('/account/forgot-password', [AccountController::class, ''])->name('web.forgotpassword');
 Route::get('/', [WebController::class, 'index'])->name('web.home');
 Route::get('/contact', [WebController::class, 'contact'])->name('web.contact');

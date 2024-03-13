@@ -30,7 +30,7 @@ class AccountController extends Controller
   {
     Auth::logout();
     $products = Product::limit(20)->get();
-    return view('web.home.index', compact('products'));
+    return redirect()->route('web.home', compact('products'));
   }
 
   public function register()

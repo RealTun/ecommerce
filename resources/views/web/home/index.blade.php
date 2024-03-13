@@ -195,7 +195,18 @@
                             </div>
                             <div class="caption text-center py-3" style="font-size: 13px">
                                 <div class="name">{{ $product->name }}</div>
-                                <div class="price text-danger fw-bold mt-2">{{ $product->price }}</div>
+                                @if ($product->sale == 0)
+                                    <span class="price fw-bold mt-2">
+                                        {{ $product->price }}
+                                    </span>
+                                @else
+                                    <span class="price text-danger fw-bold mt-2">
+                                        {{ $product->priceAfterSale }}
+                                    </span>
+                                    <span class="price text-secondary fw-medium mt-2 text-decoration-line-through">
+                                        {{ $product->price }}
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </div>
