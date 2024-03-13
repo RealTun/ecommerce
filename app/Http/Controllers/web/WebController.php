@@ -81,4 +81,8 @@ class WebController extends Controller
         DB::table('cart_item')->where(['product_id' => $id, 'size' => $size])->delete();
         return response('Xoá sản phẩm khỏi giỏ thành công!');
     }
+
+    public function contact(){
+        return view('web.home.contact');
+    }
 }

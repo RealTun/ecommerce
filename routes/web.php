@@ -14,6 +14,7 @@ Route::post('/account/store', [AccountController::class, 'storeAccount'])->name(
 Route::post('/account/checklogin', [AccountController::class, 'checkLogin'])->name('web.checklogin');
 Route::get('/account/forgot-password', [AccountController::class, ''])->name('web.forgotpassword');
 Route::get('/', [WebController::class, 'index'])->name('web.home');
+Route::get('/contact', [WebController::class, 'contact'])->name('web.contact');
 
 Route::get('/thoi-trang/{slug}', [WebController::class, 'brandIndex'])->name('web.brandIndex');
 Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
