@@ -39,12 +39,8 @@
             align-items: center;
         }
 
-        .brand a {
-            color: rgb(182, 174, 174);
-        }
-
         .brand a:hover {
-            color: #0a437f;
+            color: #0a437f !important;
             text-decoration: none;
         }
 
@@ -191,10 +187,11 @@
                                 <div class="bottom-bar"></div>
                             </a>
                             <div class="brand">
-                                <a href="">{{ $product->brand->name }}</a>
+                                <a href="" class="text-secondary">{{ $product->brand->name }}</a>
                             </div>
                             <div class="caption text-center py-3" style="font-size: 13px">
-                                <div class="name">{{ $product->name }}</div>
+                                <a href="#"
+                                    class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
                                 @if ($product->sale == 0)
                                     <span class="price fw-bold mt-2">
                                         {{ $product->price }}

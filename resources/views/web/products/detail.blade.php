@@ -31,18 +31,22 @@
             margin: 0;
         }
 
-        .product-price-new {
-            color: rgba(204, 4, 26, 1);
+        .product-price {
+            white-space: nowrap;
             font-weight: bold;
-            font-size: 21px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product-price-new {
+            color: #cc041a !important;
         }
 
         .product-price-old {
-            font-size: 17px;
-            color: rgba(105, 105, 115, 1);
+            font-size: 16px;
             font-weight: 400;
+            color: #696973 !important;
             text-decoration: line-through 0.5px;
-            line-height: 1;
         }
 
         .product-stats {
@@ -301,25 +305,40 @@
                         </div>
                     </div>
                     <div class="product-price-group d-flex border-bottom mt-3">
-                        <div
-                            class="price-wrapper col-md-5 d-flex align-items-center justify-content-between border-end ps-2 pe-2">
-                            <div class="product-price-new">{{ $product->new_price() }}</div>
-                            <div class="product-price-old">{{ $product->old_price() }}</div>
+                        <div class="col-md-6 border-end">
+                            @if ($product->sale == 0)
+                                <span class="product-price">
+                                    {{ $product->price }}
+                                </span>
+                            @else
+                                <span class="product-price product-price-new">
+                                    {{ $product->priceAfterSale }}
+                                </span>
+                                <span class="product-price product-price-old">
+                                    {{ $product->price }}
+                                </span>
+                            @endif
                         </div>
-                        <div class="product-stats col-md-7 d-flex align-items-center justify-content-between">
-                            <ul class="list-bullet ps-2 pt-2 pe-2">
-                                <li class="product-stock in-stock"><b>Kho hàng:</b> <span
-                                        style="color:rgba(80, 173, 85, 1); text-transform: uppercase; font-weight: 700;">Còn
-                                        hàng</span></li>
-                                <li class="product-reward"><b>Điểm thưởng:</b> <span>29800</span></li>
-                                <li class="product-model"><b>Mã sản phẩm:</b> <span>MSA615</span></li>
-                            </ul>
-                            <div class="brand-image product-manufacturer">
-                                <a href="{{ route('web.brandIndex', $product->brand->slug) }}">
-                                    <img src="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png"
-                                        srcset="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png 1x, https://myshoes.vn/image/cache/data/logo/adidas-140x140w.png 2x"
-                                        alt="Adidas">
-                                </a>
+                        <div class="col-md-6">
+                            <div class="row g-0">
+                                <div class="col-md-8">
+                                    <ul class="list-bullet m-0 ps-4">
+                                        <li class="product-stock in-stock"><b>Kho hàng:</b> <span
+                                                style="color:rgba(80, 173, 85, 1); text-transform: uppercase; font-weight: 700;">Còn
+                                                hàng</span></li>
+                                        <li class="product-reward"><b>Điểm thưởng:</b> <span>29800</span></li>
+                                        <li class="product-model"><b>Mã sản phẩm:</b> <span>MSA615</span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="brand-image product-manufacturer">
+                                        <a class="d-block" href="{{ route('web.brandIndex', $product->brand->slug) }}">
+                                            <img src="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png"
+                                                srcset="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png 1x, https://myshoes.vn/image/cache/data/logo/adidas-140x140w.png 2x"
+                                                alt="Adidas" class="object-fit-cover">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

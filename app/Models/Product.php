@@ -15,29 +15,21 @@ class Product extends Model
   {
     return $this->belongsTo(ProductBrand::class, 'brand_id', 'id');
   }
+  public function getPriceAttribute($value)
+  {
+    $adjustedPrice = $value * 3000;
 
-  public function old_price()
-  {
-    $price = $this->price * 3 . '.000đ';
-    return $price;
+    return number_format($adjustedPrice, (strpos($adjustedPrice, '.') === false) ? 0 : 2, ',', '.') . ' VNĐ';
   }
 
-  public function new_price()
+  public function getPriceAfterSaleAttribute()
   {
-    $price = $this->price * 2 . '.000đ';
-    return $price;
+    if ($this->attributes['sale'] != 0) {
+      $adjustPrice = $this->attributes['price'] * 3000;
+      $priceAfterSale = $adjustPrice - ($adjustPrice * ($this->attributes['sale'] / 100));
+      return number_format($priceAfterSale, (strpos($priceAfterSale, '.') === false) ? 0 : 2, ',', '.') . ' VNĐ';
+    }
+
+    return $this->price;
   }
-  /* public function getPriceAttribute($value)
-  {
-    $price = $value * 3000;
-    return number_format($price, ($price == (int)$price) ? 0 : 2, ',', '.') . ' VNĐ';
-  }
-  public function getPriceAfterSaleAttribute($value)
-  {
-    return number_format($value, ($value == (int)$value) ? 0 : 2, ',', '.') . ' VNĐ';
-  }
-  public function setSaleAttribute($value)
-  {
-    $this->attributes['sale'] = (float)$value;
-  } */
 }

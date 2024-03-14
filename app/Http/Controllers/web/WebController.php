@@ -13,7 +13,7 @@ class WebController extends Controller
   public function index()
   {
     $products = Product::limit(20)->get();
-    foreach ($products as $each) {
+    /* foreach ($products as $each) {
       $each->price *= 3000;
       if ($each->sale != 0) {
         $each->sale = (float)$each->sale;
@@ -21,7 +21,7 @@ class WebController extends Controller
         $each->priceAfterSale = number_format($each->priceAfterSale, ($each->priceAfterSale == (int)$each->priceAfterSale) ? 0 : 2, ',', '.') . ' VNĐ';
       }
       $each->price = number_format($each->price, ($each->price == (int)$each->price) ? 0 : 2, ',', '.') . ' VNĐ';
-    }
+    } */
     return view('web.home.index', compact('products'));
   }
 

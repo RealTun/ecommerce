@@ -1,13 +1,13 @@
 @push('css')
     <style>
-        .breadcrumb{
+        .breadcrumb {
             font-size: 12px;
             color: rgba(105, 105, 115, 1);
             padding: 10px 0px;
             cursor: default;
         }
 
-        .breadcrumb a:hover{
+        .breadcrumb a:hover {
             cursor: pointer;
         }
 
