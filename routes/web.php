@@ -15,15 +15,20 @@ Route::post('/account/checklogin', [AccountController::class, 'checkLogin'])->na
 Route::get('/account/forgot-password', [AccountController::class, ''])->name('web.forgotpassword');
 Route::get('/', [WebController::class, 'index'])->name('web.home');
 Route::get('/contact', [WebController::class, 'contact'])->name('web.contact');
+Route::post('/sendContact', [WebController::class, 'sendContact'])->name('web.sendContact');
 
 Route::get('/thoi-trang/{slug}', [WebController::class, 'brandIndex'])->name('web.brandIndex');
 Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
 
 
 // process cart
-Route::post('/addToCart', [WebController::class, 'addToCart']);
-Route::post('/showItemCart', [WebController::class, 'showItemCart']);
+Route::middleware('auth')->group(function(){
+  Route::post('/addToCart', [WebController::class, 'addToCart']);
+});
 Route::post('/deleteItemCart', [WebController::class, 'deleteItemCart']);
+Route::post('/showItemCart', [WebController::class, 'showItemCart']);
+
+
 
 // admin
 Route::prefix('admin')->group(function () {

@@ -42,7 +42,7 @@ $(document).ready(function () {
     }
 
 
-    function LoadCart(){
+    function LoadCart() {
         $.ajax({
             url: `/showItemCart`,
             method: 'POST',
@@ -50,19 +50,25 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
-                $('#count_product').text(response.length);         
+                $('#count_product').text(response.length);
                 addToCart(response);
                 CheckItemCart(response.length);
             },
             error: function (error) {
                 console.log(error.responseText);
+                let responseObject = $.parseJSON(error.responseText);
+                if (responseObject.message === "Unauthenticated.") {
+                    ShowToast('Vui lòng đăng nhập để thực hiện hành động này!');
+                } else {
+                    ShowToast('Đã xảy ra lỗi!');
+                }
             }
         });
     }
     LoadCart();
 
     // show notification
-    function ShowToast(message){
+    function ShowToast(message) {
         $('.toast-body').text(message);
         var toastContainer = $('#toast-container');
         var toast = toastContainer.find('.toast');
@@ -86,7 +92,7 @@ $(document).ready(function () {
             quantity: p_quantity,
             size: p_size,
         };
-    
+
         $.ajax({
             url: `/addToCart`,
             method: 'POST',
@@ -97,7 +103,7 @@ $(document).ready(function () {
                 data_p: JSON.stringify(data_p),
             },
             success: function (response) {
-                $('#count_product').text(response.length);         
+                $('#count_product').text(response.length);
                 addToCart(response);
                 CheckItemCart(response.length);
                 // $('.toast-body').text('Thêm vào giỏ hàng thành công!');
@@ -105,13 +111,17 @@ $(document).ready(function () {
             },
             error: function (error) {
                 console.log(error.responseText);
-                // $('.toast-body').text('Đã xảy ra lỗi!');
-                ShowToast('Đã xảy ra lỗi!');
+                let responseObject = $.parseJSON(error.responseText);
+                if (responseObject.message === "Unauthenticated.") {
+                    ShowToast('Vui lòng đăng nhập để thực hiện hành động này!');
+                } else {
+                    ShowToast('Đã xảy ra lỗi!');
+                }
             }
         });
     });
 
-    $(document).off('click').on('click', '.cart-remove', function() {
+    $(document).off('click').on('click', '.cart-remove', function () {
         let id_p = $(this).attr('data-id');
         let size = $(this).attr('data-size');
         $.ajax({

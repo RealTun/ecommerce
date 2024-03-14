@@ -85,4 +85,8 @@ class WebController extends Controller
     public function contact(){
         return view('web.home.contact');
     }
+
+    public function sendContact(Request $request){
+        
+    }
 }

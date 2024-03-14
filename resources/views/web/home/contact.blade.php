@@ -84,7 +84,7 @@
             box-shadow: none !important;
         }
 
-        .contact-block .form-control:focus{
+        .contact-block .form-control:focus {
             box-shadow: 10px #ccc !important;
         }
 
@@ -92,7 +92,7 @@
             min-height: 100px;
         }
 
-        .btn-send{
+        .btn-send {
             background: rgba(15, 58, 141, 1);
             font-weight: 400 !important;
             font-size: 13px !important;
@@ -103,8 +103,9 @@
             border-radius: 0;
         }
 
-        .btn-send:hover{
-            background-color: rgba(15, 58, 141, 1);
+        .btn-send:hover,
+        .btn-send:active {
+            background-color: rgba(15, 58, 141, 1) !important;
             filter: brightness(120%);
         }
     </style>
@@ -160,20 +161,23 @@
                         <div class="contact-block p-2 d-flex flex-column gap-4 justify-content-between h-100">
                             <h2 class="title m-0">Myshoes.vn sẵn sàng lắng nghe bạn!</h2>
                             <div class="d-flex flex-column gap-2">
-                                <form action="" method="post" class="">
+                                <form action="{{route('web.sendContact')}}" method="post" id="contact-form">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" name="email" placeholder="Họ và tên" id="input-name"
+                                        <input type="text" name="name" placeholder="Họ và tên" id="input-name"
                                             class="form-control">
+                                            <span class="text-danger d-none" style="font-size: 13px;">Họ tên không để trống!</span>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
-                                        <input type="email" name="password" placeholder="Email" id="input-password"
+                                        <input type="email" name="email" placeholder="Email" id="input-email"
                                             class="form-control">
+                                            <span class="text-danger d-none" style="font-size: 13px;">Email không được để trống!</span>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
-                                        <textarea class="form-control" id="input-contact" name="content-contact" rows="5" placeholder="Thông tin"></textarea>
+                                        <textarea class="form-control" id="input-content" name="content" rows="5" placeholder="Thông tin"></textarea>
+                                        <span class="text-danger d-none" style="font-size: 13px;">Thông tin không được để trống!</span>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-send">XÁC NHẬN</button>
+                                    <button type="submit" class="btn btn-primary btn-send">XÁC NHẬN</div></button>
                                 </form>
                             </div>
                         </div>
@@ -187,24 +191,32 @@
 @push('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
-            setTimeout(function() {
-                $('.alert-danger').fadeOut();
-                $('.alert-success').fadeOut();
-            }, 3000); // Adjust the duration (in milliseconds) as needed
+            // setTimeout(function() {
+            //     $('.alert-danger').fadeOut();
+            //     $('.alert-success').fadeOut();
+            // }, 3000); // Adjust the duration (in milliseconds) as needed
 
-            $("#registerForm").submit(function(event) {
+            $("#contact-form").submit(function(event) {
                 event.preventDefault();
-                let passwordInput = $("#input-password");
-                let cfPasswordInput = $("#input-cfpassword");
-                if (passwordInput.val() != cfPasswordInput.val()) {
-                    cfPasswordInput.next().removeClass('d-none').text('Mật khẩu không trùng khớp');
-                    cfPasswordInput.addClass('border-danger');
-                } else {
-                    cfPasswordInput.next().addClass('d-none').text('');
-                    cfPasswordInput.removeClass('border-danger');
+                let input_content = $('#input-content');
+                let isValid = true;
+                if(input_content.val() === ""){
+                    $('#input-content').next().removeClass('d-none');
+                    isValid = false;
+                }
+
+                $('.form-group input').each(function(index, element) {
+                    if ($(element).val() === "") {
+                        $(element).next().removeClass('d-none');
+                        isValid = false;
+                    }
+                });
+
+                if(isValid === true){
                     this.submit();
                 }
             })
+
         });
     </script>
 @endpush
