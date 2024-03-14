@@ -1,6 +1,6 @@
 <style>
     body {
-        font-family: 'Noto Sans';
+        font-family: 'Noto Sans' !important;
         font-weight: 400;
     }
 
@@ -9,6 +9,10 @@
         outline: none;
         box-shadow: none !important;
         border: 0px solid #ccc !important;
+    }
+
+    #btn_search:hover {
+        color: rgba(204, 4, 26, 1) !important;
     }
 
     .navbar-nav-scroll li:first-child a {
@@ -90,6 +94,40 @@
     .td-remove button:hover {
         color: rgba(80, 173, 85, 1);
     }
+
+    #input_search {
+        outline: none;
+        box-shadow: none;
+        border: none
+    }
+
+    .cart-product table td {
+        font-size: 13px;
+    }
+
+    .cart-product table a {
+        color: #3a58ad;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .btn.btn-outline-dark:hover {
+        background-color: #fff;
+        color: #000;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .btn.btn-pay {
+        background-color: #CC041A !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-width: 2px;
+        color: #ffffff;
+    }
+
+    .btn.btn-pay:hover {
+        filter: contrast(150%);
+        transition: 0.3s ease filter;
+    }
 </style>
 
 <div class="container p-0">
@@ -110,43 +148,45 @@
             </div>
         </div>
         <div class="cart-user d-flex justify-content-end gap-2" style="flex: 1;">
-            <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
-                <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
-                <div>
-                    @if (Auth::check())
-                        <div class="d-flex flex-column justify-content-start">
-                            <span style="font-size: 14px">Xin chào {{ Auth::user()->name }}</span>
-                            <a class="text-decoration-none" href="{{ route('web.logout') }}">Đăng xuất</a>
-                        </div>
-                    @else
+            @if (Auth::check())
+                <a href="{{ route('web.logout') }}" class="d-flex text-white text-decoration-none">
+                    <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
+                    <div style="min-width: 110px;">
+                        <span style="font-size: 12px">Xin chào {{ Auth::user()->name }}</span>
+                        <div style="font-size: 11px">Đăng xuất</div>
+                    </div>
+                </a>
+            @else
+                <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
+                    <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
+                    <div style="min-width: 110px;">
                         <span style="font-size: 12px">Tài khoản</span>
                         <div style="font-size: 11px">Đăng nhập/Đăng ký</div>
-                    @endif
-                </div>
-            </a>
+                    </div>
+                </a>
+            @endif
             <div class="shopping-cart">
-                <i class="bi bi-cart text-white" style="font-size: 1.8rem"></i>
+                <i class="bi bi-bag text-white" style="font-size: 1.8rem"></i>
                 <span class="cart-item text-white" id="count_product">0</span>
                 <div class="dropdown-menu j-dropdown" id="cart-content">
                     <ul>
                         <li class="cart-empty">
                             <p class="text-center">Không có sản phẩm trong giỏ hàng!</p>
                         </li>
-                        <li class="cart-product d-none">
-                            <table class="table">
+                        <li class="cart-product">
+                            <table class="table mb-2 px-2">
                                 <tbody></tbody>
-                                {{-- <tr>
-                                    <td class="text-center td-image">1</td>
-                                    <td class="text-start td-name">2</td>
-                                    <td class="text-end td-qty">3</td>
-                                    <td class="text-end td-total">4</td>
-                                    <td class="text-center td-remove">5
-                                        <button type="button" title="Loại bỏ" class="cart-remove">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </td>
-                                </tr> --}}
                             </table>
+                        </li>
+                        <li class="card-btn-wrapper">
+                            <div class="d-flex align-items-center justify-content-center gap-3">
+                                <button class="btn btn-outline-dark rounded-0 text-uppercase fw-medium"
+                                    style="font-size: 14px;">Xem giỏ
+                                    hàng</button>
+                                <button class="btn btn-pay rounded-0 text-uppercase fw-medium"
+                                    style="font-size: 14px;">Thanh
+                                    toán</button>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -187,7 +227,7 @@
                         <a class="nav-link text-white fw-bold" href="#">Phụ kiện</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{route('web.contact')}}">
+                        <a class="nav-link text-white fw-bold" href="{{ route('web.contact') }}">
                             <i class="bi bi-envelope"></i>
                             Liên hệ
                         </a>

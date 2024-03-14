@@ -2,58 +2,6 @@
 
 @section('title', 'Myshoes - Giày chính hãng')
 
-@push('css')
-    <style>
-        .brand {
-            background-color: rgba(247, 245, 245, 0.7);
-            font-size: 11px;
-            padding: 5px 0px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .brand a {
-            color: rgb(182, 174, 174);
-        }
-
-        .brand a:hover {
-            color: #0a437f;
-            text-decoration: none;
-        }
-
-        .product-layout {
-            position: relative;
-        }
-
-        .name {
-            line-height: 16px;
-            height: 32px;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            padding: 0px 5px;
-        }
-
-        .product-layout:hover .bottom-bar {
-            display: block;
-            transform: translateY(0);
-        }
-
-        .bottom-bar {
-            display: none;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background-color: #0a437f;
-            transition: transform 0.5s ease-in;
-        }
-    </style>
-@endpush
-
 @section('content')
     @include('web.layouts.breadcrumb')
     <div class="container">

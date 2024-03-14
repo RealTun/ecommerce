@@ -1,30 +1,32 @@
 $(document).ready(function () {
-    // check cart-empty
-    function CheckItemCart(countItem) {
-        if (countItem > 0) {
-            $('.cart-empty').addClass('d-none');
-            $('.cart-product').removeClass('d-none');
-            $('#cart-content').css({
-                'transform': 'none',
-                'margin-top': '10px',
-            });
-        }
-        else {
-            $('.cart-empty').removeClass('d-none');
-            $('.cart-product').addClass('d-none');
-            $('#cart-content').css('transform', 'translateY(25%)');
-        }
+  // check cart-empty
+  function CheckItemCart(countItem) {
+    if (countItem > 0) {
+      $('.cart-empty').addClass('d-none');
+      $('.card-btn-wrapper').removeClass('d-none');
+      $('.cart-product').removeClass('d-none');
+      $('#cart-content').css({
+        'transform': 'none',
+        'margin-top': '10px',
+      });
     }
+    else {
+      $('.cart-empty').removeClass('d-none');
+      $('.card-btn-wrapper').addClass('d-none');
+      $('.cart-product').addClass('d-none');
+      $('#cart-content').css('transform', 'translateY(25%)');
+    }
+  }
 
-    // add to cart
-    function addToCart(cart) {
-        let table = $('.cart-product .table tbody');
-        table.empty();
-        // let currentUrl = window.location.href;
-        // let slug = currentUrl.match(/\/([^\/]+)\//)[1];
-        cart.forEach(function (item) {
-            let html = `<tr style="font-size: 14px;">
-                    <td class="text-center td-image">${item['id']}</td>
+  // add to cart
+  function addToCart(cart) {
+    let table = $('.cart-product .table tbody');
+    table.empty();
+    // let currentUrl = window.location.href;
+    // let slug = currentUrl.match(/\/([^\/]+)\//)[1];
+    cart.forEach(function (item) {
+      let html = `<tr style="font-size: 14px;">
+                    <td class="text-center td-image d-none">${item['id']}</td>
                     <td class="text-start td-name">
                         <a href="">${item['name']}</a>
                         <small><br>Size ${item['size']}</small>
@@ -37,9 +39,9 @@ $(document).ready(function () {
                         </button>
                     </td>
                 </tr>`;
-            table.append(html);
-        });
-    }
+      table.append(html);
+    });
+  }
 
 
     function LoadCart() {
@@ -75,11 +77,11 @@ $(document).ready(function () {
         toastContainer.removeClass('d-none');
         toast.toast('show');
 
-        setTimeout(function () {
-            toastContainer.addClass('d-none');
-            toast.toast('hide');
-        }, 3500); // Delay for 2 seconds before hiding the toast 
-    }
+    setTimeout(function () {
+      toastContainer.addClass('d-none');
+      toast.toast('hide');
+    }, 3500); // Delay for 2 seconds before hiding the toast 
+  }
 
     // product to cart to controller using ajax
     $('.btn-cart').off('click').on('click', function () {
