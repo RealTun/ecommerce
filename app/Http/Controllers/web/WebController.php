@@ -38,6 +38,8 @@ class WebController extends Controller
   {
     $data = json_decode(stripslashes($_POST['data_p']));
 
+
+    // check exist item in cart
     $exist = DB::table('cart_item')
       ->where([
         'product_id' => $data->id,
@@ -53,8 +55,9 @@ class WebController extends Controller
         ->where(['product_id' => $data->id, 'size' => $data->size])
         ->update(['quantity' => $current_quantity + $data->quantity]);
     } else {
+      // create cart_item 
       DB::table('cart_item')->insert([
-        'session_id' => 1,
+        'session_id' => $current_session,
         'product_id' => $data->id,
         'size' => $data->size,
         'quantity' => $data->quantity,
@@ -63,7 +66,7 @@ class WebController extends Controller
 
     $product_cart = DB::table('cart_item')
       ->join('product', 'product.id', '=', 'cart_item.product_id')
-      ->where('cart_item.session_id', 1)
+      ->where('cart_item.session_id', $current_session)
       ->get();
     return response()->json($product_cart);
   }
@@ -107,11 +110,7 @@ class WebController extends Controller
     return response('Xoá sản phẩm khỏi giỏ thành công!');
   }
 
-  public function showCheckout()
-  {
-    return view('web.cart.checkout');
-  }
-  public function checkoutCart(Request $request)
+  public function showCheckout(Request $request)
   {
     $id = $request->input('id');
     $totalPrice = 0;
@@ -143,6 +142,11 @@ class WebController extends Controller
       $totalPrice += $each->totalPrice;
     }
     $totalPriceFormatted = number_format($totalPrice, 0, ',', '.') . ' VNĐ';
+    return view('web.cart.checkout', compact('data', 'totalPriceFormatted'));
+  }
+  public function checkoutCart()
+  {
+
     return view('web.cart.checkout', compact('data', 'totalPriceFormatted'));
   }
   public function contact()

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\Account\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -21,6 +22,15 @@ class AccountController extends Controller
   {
     if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
       $products = Product::limit(20)->get();
+      $exist_shopping_session = DB::table('shopping_session')
+                                ->join('user', 'user.id', '=', 'shopping_session.user_id')
+                                ->where('user.id', Auth::user()->id)
+                                ->exists();
+      if(!$exist_shopping_session){
+        DB::table('shopping_session')->insert([
+          'user_id' => Auth::user()->id,
+        ]);
+      }
       return view('web.home.index', compact('products'));
     }
     return redirect()->back()->with('error', 'Thông tin tài khoản không chính xác!');

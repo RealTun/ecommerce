@@ -35,7 +35,22 @@
             @include('web.layouts.footer')
         </footer>
     </div>
-
+    <script type="text/javascript" id="zsiqchat">
+        var $zoho = $zoho || {};
+        $zoho.salesiq = $zoho.salesiq || {
+            widgetcode: "siq5a328d2fae7d1cdc9f4859ef1d8561c69ffcc8cdb2b14317a4642b5566ec7706",
+            values: {},
+            ready: function() {}
+        };
+        var d = document;
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.id = "zsiqscript";
+        s.defer = true;
+        s.src = "https://salesiq.zohopublic.com/widget";
+        t = d.getElementsByTagName("script")[0];
+        t.parentNode.insertBefore(s, t);
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
