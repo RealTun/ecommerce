@@ -134,8 +134,8 @@
     <div class="header-top d-flex justify-content-between align-items-center py-4 px-5">
         {{-- #0a437f --}}
         <div class="logo" style="flex: 1;">
-            <a href="{{ route('web.home') }}">
-                <img src="{{ asset('images/logo/logo_ms-565x195.png') }}" alt="shose.vn" height="45">
+            <a href="{{ route('web.home') }}" class="d-block w-50">
+                <img src="{{asset('images/logo/Capture-removebg-preview (1).png')}}" alt="shoes.vn" class="w-100 h-50 object-fit-cover ">
             </a>
         </div>
         <div class="input-search" style="flex: 2;">

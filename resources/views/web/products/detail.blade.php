@@ -68,7 +68,7 @@
             font-size: 16px;
             color: rgba(80, 173, 85, 1);
             position: absolute;
-            left: 10px;
+            left: 7px;
         }
 
         b {
@@ -322,7 +322,7 @@
                         <div class="col-md-6">
                             <div class="row g-0">
                                 <div class="col-md-8">
-                                    <ul class="list-bullet m-0 ps-4">
+                                    <ul class="list-bullet m-0 ps-4 position-relative">
                                         <li class="product-stock in-stock"><b>Kho hàng:</b> <span
                                                 style="color:rgba(80, 173, 85, 1); text-transform: uppercase; font-weight: 700;">Còn
                                                 hàng</span></li>

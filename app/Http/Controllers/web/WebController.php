@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\ProductBrand;
+use Illuminate\Support\Facades\Auth;
 
 class WebController extends Controller
 {
@@ -35,7 +36,10 @@ class WebController extends Controller
   public function addToCart()
   {
     $data = json_decode(stripslashes($_POST['data_p']));
-
+    $current_session = DB::table('shopping_session')
+                        ->join('user', 'user.id', '=', 'shopping_session.user_id')
+                        ->where('user.id', Auth::user()->id)
+                        ->value('shopping_session.id');
 
     // check exist item in cart
     $exist = DB::table('cart_item')
@@ -55,8 +59,9 @@ class WebController extends Controller
         ->update(['quantity' => $current_quantity + $data->quantity]);
     } else {
       // create cart_item 
+      
       DB::table('cart_item')->insert([
-        'session_id' => 1,
+        'session_id' => $current_session,
         'product_id' => $data->id,
         'size' => $data->size,
         'quantity' => $data->quantity,
@@ -65,7 +70,7 @@ class WebController extends Controller
 
     $product_cart = DB::table('cart_item')
       ->join('product', 'product.id', '=', 'cart_item.product_id')
-      ->where('cart_item.session_id', 1)
+      ->where('cart_item.session_id', $current_session)
       ->get();
     // response
     return response()->json($product_cart);
@@ -73,9 +78,14 @@ class WebController extends Controller
 
   public function showItemCart()
   {
+    $current_session = DB::table('shopping_session')
+                        ->join('user', 'user.id', '=', 'shopping_session.user_id')
+                        ->where('user.id', Auth::user()->id)
+                        ->value('shopping_session.id');
+
     $product_cart = DB::table('cart_item')
       ->join('product', 'product.id', '=', 'cart_item.product_id')
-      ->where('cart_item.session_id', 1)
+      ->where('cart_item.session_id', $current_session)
       ->get();
     return response()->json($product_cart);
   }

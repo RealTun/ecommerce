@@ -211,40 +211,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class="container g-0">
-        <div class="tab-customer-feedback py-5 px-4">
-            <div class="title-wrapper mb-5">
-                <h3>KHÁCH HÀNG NÓI VỀ MYSHOES.VN</h3>
-                <div class="title-divider"></div>
-                <div class="subtitle">#FEEDBACK</div>
-            </div>
-            <div class="container-swiper">
-                <div class="swiper mt-4">
-                    <div class="slide-container">
-                        <div class="card-wrapper swiper-wrapper">
-                            @for ($i = 0; $i < 5; $i++)
-                                <div class="card swiper-slide">
-                                    <div class="image-box">
-                                        <img src="{{ asset('images/customer/IMG_1816-500x500.jpg') }}" alt="">
-                                    </div>
-                                    <!--<img src="images/profile/profile1.jpg" alt="" />-->
-                                    <div class="detail-feedback mt-3">
-                                        <div class="feedback-">Myshoes.vn bán hàng chính hãng, giá rất ok, tôi đã mua một
-                                            đôi giày chạy bộ của Nike đi rất êm và thích.</div>
-                                        <div class="name-cus fst-italic fw-semibold mt-5">- Anh Nam -</div>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="swiper-button-next swiper-navBtn"></div>
-                    <div class="swiper-button-prev swiper-navBtn"></div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </div>
-
-    </div> --}}
     @include('web.layouts.feedback')
 @endsection
 
