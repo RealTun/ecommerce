@@ -187,11 +187,10 @@
                                 <div class="bottom-bar"></div>
                             </a>
                             <div class="brand">
-                                <a href="" class="text-secondary">{{ $product->brand->name }}</a>
+                                <a href="" data-id="{{$product->id}}" class="text-secondary">{{ $product->brand->name }}</a>
                             </div>
                             <div class="caption text-center py-3" style="font-size: 13px">
-                                <a href="#"
-                                    class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
+                                <a href="#" class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
                                 @if ($product->sale == 0)
                                     <span class="price fw-bold mt-2">
                                         {{ $product->price }}
@@ -214,40 +213,15 @@
     @include('web.layouts.feedback')
 @endsection
 
-{{-- @push('javascript')
+@push('javascript')
     <script type="text/javascript">
-        var swiper = new Swiper(".slide-container", {
-            slidesPerView: 4,
-            spaceBetween: 20,
-            sliderPerGroup: 4,
-            loop: true,
-            centerSlide: "true",
-            fade: "true",
-            grabCursor: "true",
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-                dynamicBullets: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                },
-                520: {
-                    slidesPerView: 2,
-                },
-                768: {
-                    slidesPerView: 3,
-                },
-                1000: {
-                    slidesPerView: 4,
-                },
-            },
+        let brand = $('.brand a');
+        console.log(brand);
+        brand.each(function(hell) {
+            let slug = `giay-${$(this).text().toLowerCase()}`;
+            let id_p = $(this).attr('data-id');
+            let route = `/thoi-trang/${slug}/${id_p}`;
+            $(this).parent().prev().attr('href', route);
         });
     </script>
-@endpush --}}
+@endpush

@@ -78,16 +78,19 @@ class WebController extends Controller
 
   public function showItemCart()
   {
-    $current_session = DB::table('shopping_session')
+    if(Auth::check()){
+      $current_session = DB::table('shopping_session')
                         ->join('user', 'user.id', '=', 'shopping_session.user_id')
                         ->where('user.id', Auth::user()->id)
                         ->value('shopping_session.id');
 
-    $product_cart = DB::table('cart_item')
-      ->join('product', 'product.id', '=', 'cart_item.product_id')
-      ->where('cart_item.session_id', $current_session)
-      ->get();
-    return response()->json($product_cart);
+      $product_cart = DB::table('cart_item')
+        ->join('product', 'product.id', '=', 'cart_item.product_id')
+        ->where('cart_item.session_id', $current_session)
+        ->get();
+      return response()->json($product_cart);
+    }
+    return response()->json([]);
   }
 
   public function deleteItemCart(Request $request)
