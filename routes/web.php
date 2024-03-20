@@ -22,13 +22,12 @@ Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])-
 
 
 // process cart
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
   Route::post('/addToCart', [WebController::class, 'addToCart']);
+  Route::post('/checkout', [WebController::class, 'showCheckout'])->name('showCheckout');
 });
 Route::post('/deleteItemCart', [WebController::class, 'deleteItemCart']);
 Route::post('/showItemCart', [WebController::class, 'showItemCart']);
-
-
 
 // admin
 Route::prefix('admin')->group(function () {

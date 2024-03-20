@@ -116,18 +116,6 @@
         color: #000;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
-
-    .btn.btn-pay {
-        background-color: #CC041A !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border-width: 2px;
-        color: #ffffff;
-    }
-
-    .btn.btn-pay:hover {
-        filter: contrast(150%);
-        transition: 0.3s ease filter;
-    }
 </style>
 
 <div class="container p-0">
@@ -180,12 +168,16 @@
                         </li>
                         <li class="card-btn-wrapper">
                             <div class="d-flex align-items-center justify-content-center gap-3">
-                                <button class="btn btn-outline-dark rounded-0 text-uppercase fw-medium"
-                                    style="font-size: 14px;">Xem giỏ
-                                    hàng</button>
+                                <form action="{{ route('showCheckout') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                                    <button type="submit" style="font-size: 14px;"
+                                        class="btn btn-outline-dark rounded-0 text-uppercase fw-medium">
+                                        Xem giỏ hàng
+                                    </button>
+                                </form>
                                 <button class="btn btn-pay rounded-0 text-uppercase fw-medium"
-                                    style="font-size: 14px;">Thanh
-                                    toán</button>
+                                    style="font-size: 14px;">Thanh toán</button>
                             </div>
                         </li>
                     </ul>

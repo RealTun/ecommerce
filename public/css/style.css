@@ -1,0 +1,12 @@
+.btn.btn-pay {
+    background-color: #cc041a !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-width: 2px;
+    color: #ffffff;
+}
+
+.btn.btn-pay:hover {
+    filter: contrast(150%);
+    transition: 0.3s ease filter;
+    color: #ffffff;
+}
