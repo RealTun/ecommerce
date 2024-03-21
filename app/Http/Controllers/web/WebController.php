@@ -37,7 +37,10 @@ class WebController extends Controller
   public function addToCart()
   {
     $data = json_decode(stripslashes($_POST['data_p']));
-
+    $current_session = DB::table('shopping_session')
+      ->join('user', 'user.id', '=', 'shopping_session.user_id')
+      ->where('user.id', Auth::user()->id)
+      ->value('shopping_session.id');
 
     // check exist item in cart
     $exist = DB::table('cart_item')

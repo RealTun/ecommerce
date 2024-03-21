@@ -30,7 +30,7 @@ $(document).ready(function () {
                     <td class="text-end td-qty">x${item['quantity']}</td>
                     <td class="text-end td-total">${item['totalPrice']}</td>
                     <td class="text-end td-remove">
-                        <button type="button" title="Loại bỏ" class="cart-remove" data-id="${item['id']}" data-size="${item['size']}">
+                        <button type="button" title="Loại bỏ" class="cart-remove" data-id="${item['product_id']}" data-size="${item['size']}">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </td>
@@ -76,7 +76,7 @@ $(document).ready(function () {
     setTimeout(function () {
       toastContainer.addClass('d-none');
       toast.toast('hide');
-    }, 3500); // Delay for 2 seconds before hiding the toast 
+    }, 3500); // Delay  for 2 seconds before hiding the toast 
   }
 
   // product to cart to controller using ajax
@@ -133,7 +133,8 @@ $(document).ready(function () {
       },
       success: function (response) {
         LoadCart();
-        // ShowToast(response);
+        ShowToast(response);
+        console.log(response);
       },
       error: function (error) {
         console.log(error.responseText);
