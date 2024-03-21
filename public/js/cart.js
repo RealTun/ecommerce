@@ -22,8 +22,6 @@ $(document).ready(function () {
   function addToCart(cart) {
     let table = $('.cart-product .table tbody');
     table.empty();
-    // let currentUrl = window.location.href;
-    // let slug = currentUrl.match(/\/([^\/]+)\//)[1];
     cart.forEach(function (item) {
       let html = `<tr style="font-size: 14px;">
                     <td class="text-center td-image d-none">${item['id']}</td>

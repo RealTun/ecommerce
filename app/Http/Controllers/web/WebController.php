@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\ProductBrand;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 class WebController extends Controller
 {
@@ -37,9 +39,9 @@ class WebController extends Controller
   {
     $data = json_decode(stripslashes($_POST['data_p']));
     $current_session = DB::table('shopping_session')
-                        ->join('user', 'user.id', '=', 'shopping_session.user_id')
-                        ->where('user.id', Auth::user()->id)
-                        ->value('shopping_session.id');
+      ->join('user', 'user.id', '=', 'shopping_session.user_id')
+      ->where('user.id', Auth::user()->id)
+      ->value('shopping_session.id');
 
     // check exist item in cart
     $exist = DB::table('cart_item')
@@ -59,7 +61,7 @@ class WebController extends Controller
         ->update(['quantity' => $current_quantity + $data->quantity]);
     } else {
       // create cart_item 
-      
+
       DB::table('cart_item')->insert([
         'session_id' => $current_session,
         'product_id' => $data->id,
@@ -78,11 +80,11 @@ class WebController extends Controller
 
   public function showItemCart()
   {
-    if(Auth::check()){
+    if (Auth::check()) {
       $current_session = DB::table('shopping_session')
-                        ->join('user', 'user.id', '=', 'shopping_session.user_id')
-                        ->where('user.id', Auth::user()->id)
-                        ->value('shopping_session.id');
+        ->join('user', 'user.id', '=', 'shopping_session.user_id')
+        ->where('user.id', Auth::user()->id)
+        ->value('shopping_session.id');
 
       $product_cart = DB::table('cart_item')
         ->join('product', 'product.id', '=', 'cart_item.product_id')
@@ -101,11 +103,21 @@ class WebController extends Controller
     return response('Xoá sản phẩm khỏi giỏ thành công!');
   }
 
-    public function contact(){
-        return view('web.home.contact');
-    }
+  public function contact()
+  {
+    return view('web.home.contact');
+  }
 
-    public function sendContact(Request $request){
-        
-    }
+  public function sendContact(Request $request)
+  {
+  }
+
+  public function sendMail()
+  {
+    $mail = new SendEmail();
+    $mail->subject('Hoá đơn đặt hàng');
+    $mail->view('web.home.email');
+
+    Mail::send($mail);
+  }
 }
