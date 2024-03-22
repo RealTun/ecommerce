@@ -72,6 +72,7 @@
             text-decoration: none;
             font-size: 14px;
             color: #333333;
+            border: 0 !important
         }
 
         .text-voucher:hover {
@@ -172,10 +173,17 @@
             <div class="col-md-3">
                 <div class="border border-emerald-500 p-4 h-100">
                     <div class="d-flex flex-column gap-3">
-                        <a href="#" class="text-voucher">
+                        <button class="btn text-voucher p-0 shadow-0" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSale" aria-expanded="false" aria-controls="collapseSale">
                             <span>Sử dụng mã giảm giá</span>
                             <i class="bi bi-arrow-right"></i>
-                        </a>
+                        </button>
+                        <div id="collapseSale" class="collapse">
+                            <div class="d-flex">
+                                <input class="form-control rounded-0" type="text" name="inputVoucher" id="inputVoucher">
+                                <button class="btn btn-sm btn-pay text-uppercase text-nowrap rounded-0">áp dụng</button>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table border border-emerald-500">
                                 <tr class="d-flex">
@@ -191,7 +199,7 @@
                                         <strong>Tổng tiền:</strong>
                                     </td>
                                     <td style="min-width: 100px;">
-                                        <span>3.980.000 VNĐ</span>
+                                        <span>{{ $totalPriceFormatted }}</span>
                                     </td>
                                 </tr>
                             </table>

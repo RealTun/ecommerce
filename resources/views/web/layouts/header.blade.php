@@ -123,7 +123,7 @@
         {{-- #0a437f --}}
         <div class="logo" style="flex: 1;">
             <a href="{{ route('web.home') }}" class="d-block w-50">
-                <img src="{{asset('images/logo/gr4-logo.png')}}" alt="shoes.vn" class="w-100 h-50 object-fit-cover ">
+                <img src="{{ asset('images/logo/gr4-logo.png') }}" alt="shoes.vn" class="w-100 h-50 object-fit-cover ">
             </a>
         </div>
         <div class="input-search" style="flex: 2;">
@@ -168,14 +168,16 @@
                         </li>
                         <li class="card-btn-wrapper">
                             <div class="d-flex align-items-center justify-content-center gap-3">
-                                <form action="{{ route('showCheckout') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                    <button type="submit" style="font-size: 14px;"
-                                        class="btn btn-outline-dark rounded-0 text-uppercase fw-medium">
-                                        Xem giỏ hàng
-                                    </button>
-                                </form>
+                                @if (Auth::check())
+                                    <form action="{{ route('showCheckout') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+                                        <button type="submit" style="font-size: 14px;"
+                                            class="btn btn-outline-dark rounded-0 text-uppercase fw-medium">
+                                            Xem giỏ hàng
+                                        </button>
+                                    </form>
+                                @endif
                                 <button class="btn btn-pay rounded-0 text-uppercase fw-medium"
                                     style="font-size: 14px;">Thanh toán</button>
                             </div>
