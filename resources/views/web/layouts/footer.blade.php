@@ -18,7 +18,7 @@
         padding-left: 80px;
     }
 
-    .footer-mid::before{
+    .footer-mid::before {
         content: "";
         position: absolute;
         left: 0;
@@ -29,7 +29,7 @@
         margin-top: -30px;
     }
 
-    .footer-bottom::before{
+    .footer-bottom::before {
         content: "";
         position: absolute;
         left: 0;
@@ -40,12 +40,12 @@
         margin-top: -10px;
     }
 
-    #btn_mailsub:hover{
+    #btn_mailsub:hover {
         filter: contrast(150%);
         transition: 0.3s ease filter;
     }
 
-    .nav.flex-column a:hover{
+    .nav.flex-column a:hover {
         color: red !important;
     }
 </style>
@@ -64,13 +64,13 @@
             </div>
             <div class="col-md-6">
                 <div class="module-body">
-                    <form action="{{route('web.sendMail')}}" method="POST">
+                    <form action="{{ route('web.sendMail') }}" method="POST" id="form-sendmail">
                         @csrf
                         <div class="input-group">
-                            <input type="text" style="font-size: 14px;" class="form-control" id="input_mailsub"
-                                placeholder="Nhập email của bạn">
-                            <button type="submit" class="btn text-white" style="background-color: #CC041A" type="button"
-                                id="btn_mailsub">
+                            <input type="email" style="font-size: 14px;" class="form-control" id="input_mailsub"
+                                name="email" placeholder="Nhập email của bạn">
+                            <button type="submit" class="btn text-white" style="background-color: #CC041A"
+                                type="button" id="btn_mailsub">
                                 <i class="bi bi-envelope" style="font-size: 0.9em;"></i>
                                 <span class="fw-bold" style="font-size: 14px">Đăng ký</span>
                             </button>
@@ -150,3 +150,23 @@
         </div>
     </div>
 </div>
+
+@push('javascript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#form-sendmail').submit(function(e) {
+                e.preventDefault();
+                if ($('#input_mailsub').val() == "" || !$('#flexCheckChecked').prop('checked')) {
+                    alert("Vui lòng đồng ý với điều khoản và điền đầy đủ email!");
+                } else {
+                    this.submit();
+                }
+            });
+
+            let successMessage = '{{ session('success') }}';
+            if (successMessage) {
+                alert(successMessage);
+            }
+        });
+    </script>
+@endpush

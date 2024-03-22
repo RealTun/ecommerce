@@ -216,7 +216,7 @@
 @push('javascript')
     <script type="text/javascript">
         let brand = $('.brand a');
-        console.log(brand);
+        // console.log(brand);
         brand.each(function(hell) {
             let slug = `giay-${$(this).text().toLowerCase()}`;
             let id_p = $(this).attr('data-id');

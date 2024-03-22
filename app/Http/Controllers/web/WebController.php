@@ -9,7 +9,7 @@ use App\Models\Product;
 use App\Models\ProductBrand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendEmail;
+use App\Mail\SendMail;
 
 class WebController extends Controller
 {
@@ -81,18 +81,32 @@ class WebController extends Controller
   public function showItemCart()
   {
     if (Auth::check()) {
-      $current_session = DB::table('shopping_session')
-        ->join('user', 'user.id', '=', 'shopping_session.user_id')
-        ->where('user.id', Auth::user()->id)
-        ->value('shopping_session.id');
-
       $product_cart = DB::table('cart_item')
         ->join('product', 'product.id', '=', 'cart_item.product_id')
-        ->where('cart_item.session_id', $current_session)
+        ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
+        ->where('user_id', Auth::user()->id)
         ->get();
-      return response()->json($product_cart);
+
+      foreach ($product_cart as $each) {
+        if ($each->sale == 0) {
+          $each->price = $each->price * 3000;
+        } else {
+          $adjustPrice = $each->price * 3000;
+          $priceAfterSale = $adjustPrice - ($adjustPrice * ($each->sale / 100));
+          $each->price = $priceAfterSale;
+        }
+
+        $each->price = ceil($each->price / 1000) * 1000;
+        if ($each->quantity != 0)
+          $each->totalPrice = $each->quantity * $each->price;
+
+        $each->price = number_format($each->price, 0, ',', '.') . ' VNĐ';
+        $each->totalPrice = number_format($each->totalPrice, 0, ',', '.') . ' VNĐ';
+      }
+    } else {
+      $product_cart = [];
     }
-    return response()->json([]);
+    return response()->json($product_cart);
   }
 
   public function deleteItemCart(Request $request)
@@ -101,6 +115,41 @@ class WebController extends Controller
     $size = $request->input('size');
     DB::table('cart_item')->where(['product_id' => $id, 'size' => $size])->delete();
     return response('Xoá sản phẩm khỏi giỏ thành công!');
+  }
+
+  public function showCheckout(Request $request)
+  {
+    $id = $request->input('id');
+    $totalPrice = 0;
+    $data = DB::table('cart_item')
+      ->join('product', 'product.id', '=', 'cart_item.product_id')
+      ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
+      ->where('user_id', $id)
+      ->get();
+    foreach ($data as $each) {
+      $each->slug = DB::table('product_brand')
+        ->join('product', 'product_brand.id', '=', 'product.brand_id')
+        ->where('product.id', $each->product_id)
+        ->value('slug');
+
+      if ($each->sale == 0) {
+        $each->price = $each->price * 3000;
+      } else {
+        $adjustPrice = $each->price * 3000;
+        $priceAfterSale = $adjustPrice - ($adjustPrice * ($each->sale / 100));
+        $each->price = $priceAfterSale;
+      }
+
+      $each->price = ceil($each->price / 1000) * 1000;
+      if ($each->quantity != 0)
+        $each->totalPrice = $each->quantity * $each->price;
+      $each->productIdFormatted = strlen($each->product_id) == 1 ? '00' . $each->product_id : '0' . $each->product_id;
+      $each->priceFormatted  = number_format($each->price, 0, ',', '.') . ' VNĐ';
+      $each->totalPriceFormatted = number_format($each->totalPrice, 0, ',', '.') . ' VNĐ';
+      $totalPrice += $each->totalPrice;
+    }
+    $totalPriceFormatted = number_format($totalPrice, 0, ',', '.') . ' VNĐ';
+    return view('web.cart.checkout', compact('data', 'totalPriceFormatted'));
   }
 
   public function contact()
@@ -112,9 +161,11 @@ class WebController extends Controller
   {
   }
 
-  public function sendMail()
+  public function sendMail(Request $request)
   {
-    $mail = new SendEmail();
-    Mail::to('dotuan458@gmail.com')->send($mail);
+    $mail_input = $request->email;
+    $mail = new SendMail();
+    Mail::to($mail_input)->send($mail);
+    return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
   }
 }
