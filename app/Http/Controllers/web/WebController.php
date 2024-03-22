@@ -115,9 +115,6 @@ class WebController extends Controller
   public function sendMail()
   {
     $mail = new SendEmail();
-    $mail->subject('Hoá đơn đặt hàng');
-    $mail->view('web.home.email');
-
-    Mail::send($mail);
+    Mail::to('dotuan458@gmail.com')->send($mail);
   }
 }

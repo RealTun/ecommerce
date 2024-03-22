@@ -27,7 +27,7 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Email',
+            subject: 'Hoá đơn đặt hàng',
         );
     }
 
@@ -37,7 +37,7 @@ class SendEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'web.home.email',
         );
     }
 

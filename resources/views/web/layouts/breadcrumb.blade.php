@@ -18,12 +18,11 @@
     </style>
 @endpush
 
-<div class="container-fluid g-0 bg-body-tertiary">
+<div class="bg-body-tertiary">
     <div class="container px-5">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-chevron ">
+            <ol class="breadcrumb breadcrumb-chevron m-0">
                 <li class="breadcrumb-item">
-                    {{-- <a class="link-body-emphasis text-decoration-none" href="#">Trang chủ</a> --}}
                     Trang chủ
                 </li>
                 <li class="breadcrumb-item">

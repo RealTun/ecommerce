@@ -64,11 +64,12 @@
             </div>
             <div class="col-md-6">
                 <div class="module-body">
-                    <form action="">
+                    <form action="{{route('web.sendMail')}}" method="POST">
+                        @csrf
                         <div class="input-group">
                             <input type="text" style="font-size: 14px;" class="form-control" id="input_mailsub"
                                 placeholder="Nhập email của bạn">
-                            <button class="btn text-white" style="background-color: #CC041A" type="button"
+                            <button type="submit" class="btn text-white" style="background-color: #CC041A" type="button"
                                 id="btn_mailsub">
                                 <i class="bi bi-envelope" style="font-size: 0.9em;"></i>
                                 <span class="fw-bold" style="font-size: 14px">Đăng ký</span>

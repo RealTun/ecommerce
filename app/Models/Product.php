@@ -18,16 +18,17 @@ class Product extends Model
   public function getPriceAttribute($value)
   {
     $adjustedPrice = $value * 3000;
-
-    return number_format($adjustedPrice, (strpos($adjustedPrice, '.') === false) ? 0 : 2, ',', '.') . ' VNĐ';
+    $roundedPrice = ceil($adjustedPrice / 1000) * 1000;
+    return number_format($roundedPrice, 0, ',', '.') . ' VNĐ';
   }
 
   public function getPriceAfterSaleAttribute()
   {
     if ($this->attributes['sale'] != 0) {
-      $adjustPrice = $this->attributes['price'] * 3000;
+      $adjustPrice = ceil($this->attributes['price'] * 3000 / 1000) * 1000;
       $priceAfterSale = $adjustPrice - ($adjustPrice * ($this->attributes['sale'] / 100));
-      return number_format($priceAfterSale, (strpos($priceAfterSale, '.') === false) ? 0 : 2, ',', '.') . ' VNĐ';
+      $roundedPriceAfterSale = ceil($priceAfterSale / 1000) * 1000;
+      return number_format($roundedPriceAfterSale, 0, ',', '.') . ' VNĐ';
     }
 
     return $this->price;
