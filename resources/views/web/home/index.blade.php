@@ -182,15 +182,17 @@
                     <div class="col-md-3">
                         <div class="product-layout border">
                             <a href="" class="img-product d-block position-relative">
-                                <img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
+                                <img src="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
                                     class="object-fit-cover w-100 h-100" alt="shoes">
                                 <div class="bottom-bar"></div>
                             </a>
                             <div class="brand">
-                                <a href="" data-id="{{$product->id}}" class="text-secondary">{{ $product->brand->name }}</a>
+                                <a href="" data-id="{{ $product->id }}"
+                                    class="text-secondary">{{ $product->brand->name }}</a>
                             </div>
                             <div class="caption text-center py-3" style="font-size: 13px">
-                                <a href="#" class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
+                                <a href="#"
+                                    class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
                                 @if ($product->sale == 0)
                                     <span class="price fw-bold mt-2">
                                         {{ $product->price }}

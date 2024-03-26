@@ -16,6 +16,11 @@ class WebController extends Controller
   public function index()
   {
     $products = Product::limit(20)->get();
+    foreach ($products as $each) {
+      $each->path = DB::table('image')->join('product', 'product_id', '=', 'product.id')
+        ->where('product_id', '=', $each->id)
+        ->value('path');
+    }
     return view('web.home.index', compact('products'));
   }
 
@@ -28,11 +33,14 @@ class WebController extends Controller
   public function detailsProduct(string $slug, string $id)
   {
     $product = Product::find($id);
+    $product_images = DB::table('image')->join('product', 'product_id', '=', 'product.id')
+      ->where('product_id', '=', $id)
+      ->get();
     $product_size = DB::table('product')
       ->join('product_inventory', 'product.id', '=', 'product_inventory.product_id')
       ->where('product_id', $id)
       ->get();
-    return view('web.products.detail', compact('product', 'product_size'));
+    return view('web.products.detail', compact('product', 'product_size', 'product_images'));
   }
 
   public function addToCart()
