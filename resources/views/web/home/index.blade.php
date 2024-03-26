@@ -182,7 +182,7 @@
                     <div class="col-md-3">
                         <div class="product-layout border">
                             <a href="" class="img-product d-block position-relative">
-                                <img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
+                                <img loading="lazy" src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
                                     class="object-fit-cover w-100 h-100" alt="shoes">
                                 <div class="bottom-bar"></div>
                             </a>

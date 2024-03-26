@@ -204,9 +204,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <button class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
+                        <a href="{{ route('web.sendMail') }}" class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
                             Thanh toán
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

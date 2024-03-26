@@ -161,11 +161,16 @@ class WebController extends Controller
   {
   }
 
-  public function sendMail(Request $request)
+  public function sendMail()
   {
-    $mail_input = $request->email;
     $mail = new SendMail();
-    Mail::to($mail_input)->send($mail);
-    return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
+    $product_cart = DB::table('cart_item')
+        ->join('product', 'product.id', '=', 'cart_item.product_id')
+        ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
+        ->where('user_id', Auth::user()->id)
+        ->get();
+    $mail->with(['data' => $product_cart]);
+    Mail::to(Auth::user()->email)->send($mail);
+    // return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
   }
 }

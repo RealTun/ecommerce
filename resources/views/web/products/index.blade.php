@@ -97,7 +97,9 @@
                                         <div class="product-layout border">
                                             <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
                                                 class="img-product d-block position-relative">
-                                                <img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
+                                                {{-- <img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
+                                                    class="object-fit-cover w-100 h-100" alt="shoes"> --}}
+                                                    <img loading="lazy" srcset="https://ik.imagekit.io/fi1c554v7/shoes/Nike/giay-nike-air-zoom-pegasus-40-premium-nam-xanh-lam-05-800x800.jpg?updatedAt=1711079649057"
                                                     class="object-fit-cover w-100 h-100" alt="shoes">
                                                 <div class="bottom-bar"></div>
                                             </a>

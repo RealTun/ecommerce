@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-6">
                 <div class="module-body">
-                    <form action="{{ route('web.sendMail') }}" method="POST" id="form-sendmail">
+                    <form action="" method="POST" id="form-sendmail">
                         @csrf
                         <div class="input-group">
                             <input type="email" style="font-size: 14px;" class="form-control" id="input_mailsub"
@@ -154,19 +154,19 @@
 @push('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#form-sendmail').submit(function(e) {
-                e.preventDefault();
-                if ($('#input_mailsub').val() == "" || !$('#flexCheckChecked').prop('checked')) {
-                    alert("Vui lòng đồng ý với điều khoản và điền đầy đủ email!");
-                } else {
-                    this.submit();
-                }
-            });
+            // $('#form-sendmail').submit(function(e) {
+            //     e.preventDefault();
+            //     if ($('#input_mailsub').val() == "" || !$('#flexCheckChecked').prop('checked')) {
+            //         alert("Vui lòng đồng ý với điều khoản và điền đầy đủ email!");
+            //     } else {
+            //         this.submit();
+            //     }
+            // });
 
-            let successMessage = '{{ session('success') }}';
-            if (successMessage) {
-                alert(successMessage);
-            }
+            // let successMessage = '{{ session('success') }}';
+            // if (successMessage) {
+            //     alert(successMessage);
+            // }
         });
     </script>
 @endpush
