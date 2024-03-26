@@ -246,24 +246,17 @@
                 <div class="detail-left col-md-7 d-flex">
                     <div class="col-md-2">
                         <div class="additional-images d-grid gap-3">
-                            <div><img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
-                                    height="100px" alt=""></div>
-                            <div><img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
-                                    height="100px" alt=""></div>
-                            <div><img
-                                    src="{{ asset('images/shoes/nike/giay-nike-air-zoom-pegasus-40-premium-nam-xanh-lam-05-800x800.jpg') }}"
-                                    height="100px" alt=""></div>
-                            <div><img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
-                                    height="100px" alt=""></div>
-                            <div><img
-                                    src="{{ asset('images/shoes/nike/giay-nike-air-zoom-pegasus-40-premium-nam-xanh-lam-05-800x800.jpg') }}"
-                                    height="100px" alt=""></div>
+                            @foreach ($product_images as $each)
+                                <div>
+                                    <img src="https://ik.imagekit.io/b78avuku4/{{ $each->path }}" height="100px"
+                                        alt="">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-md-10 pe-3">
                         <img class="object-fit-cover w-100 h-100 main-img"
-                            src="{{ asset('images/shoes/nike/giay-nike-air-zoom-pegasus-40-premium-nam-xanh-lam-01-800x800.jpg') }}"
-                            alt="">
+                            src="https://ik.imagekit.io/b78avuku4/{{ $product_images[0]->path }}" alt="">
                     </div>
                 </div>
                 <div class="detail-right col-md-5 ps-3 pt-0">
@@ -392,8 +385,7 @@
                                 <div class="stepper">
                                     <input id="product-quantity" type="text" name="quantity" value="1"
                                         data-minimum="1" class="form-control text-center" readonly>
-                                    <input id="product-id" type="hidden" name="product_id"
-                                        value="{{ $product->id }}">
+                                    <input id="product-id" type="hidden" name="product_id" value="{{ $product->id }}">
                                     <div class="btn-quantity-block">
                                         <div id="quantity-up"
                                             class="d-flex align-items-center justify-content-center flex-fill"><i
