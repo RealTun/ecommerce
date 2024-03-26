@@ -27,6 +27,11 @@ class WebController extends Controller
   public function brandIndex(string $slug)
   {
     $brand = ProductBrand::where('slug', $slug)->first();
+    foreach($brand->products as $each){
+      $each->path = DB::table('image')->join('product', 'product_id', '=', 'product.id')
+        ->where('product_id', '=', $each->id)
+        ->value('path');
+    }
     return view('web.products.index', compact('brand'));
   }
 
@@ -82,6 +87,22 @@ class WebController extends Controller
       ->join('product', 'product.id', '=', 'cart_item.product_id')
       ->where('cart_item.session_id', $current_session)
       ->get();
+    foreach($product_cart as $each){
+      if ($each->sale == 0) {
+        $each->price = $each->price * 3000;
+      } else {
+        $adjustPrice = $each->price * 3000;
+        $priceAfterSale = $adjustPrice - ($adjustPrice * ($each->sale / 100));
+        $each->price = $priceAfterSale;
+      }
+
+      $each->price = ceil($each->price / 1000) * 1000;
+      if ($each->quantity != 0)
+        $each->totalPrice = $each->quantity * $each->price;
+
+      $each->price = number_format($each->price, 0, ',', '.') . ' VNĐ';
+      $each->totalPrice = number_format($each->totalPrice, 0, ',', '.') . ' VNĐ';
+    }
     // response
     return response()->json($product_cart);
   }
@@ -125,12 +146,13 @@ class WebController extends Controller
     return response('Xoá sản phẩm khỏi giỏ thành công!');
   }
 
-  public function showCheckout(Request $request)
+  public function showCheckout()
   {
-    $id = $request->input('id');
+    $id = Auth::user()->id;
     $totalPrice = 0;
     $data = DB::table('cart_item')
       ->join('product', 'product.id', '=', 'cart_item.product_id')
+      // ->join('image', 'product.id', '=', 'image.product_id')
       ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
       ->where('user_id', $id)
       ->get();
@@ -179,6 +201,6 @@ class WebController extends Controller
         ->get();
     $mail->with(['data' => $product_cart]);
     Mail::to(Auth::user()->email)->send($mail);
-    // return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
+    return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
   }
 }

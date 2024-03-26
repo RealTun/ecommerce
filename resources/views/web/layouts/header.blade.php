@@ -169,9 +169,8 @@
                         <li class="card-btn-wrapper">
                             <div class="d-flex align-items-center justify-content-center gap-3">
                                 @if (Auth::check())
-                                    <form action="{{ route('showCheckout') }}" method="POST">
+                                    <form action="{{ route('showCheckout') }}" method="GET">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                                         <button type="submit" style="font-size: 14px;"
                                             class="btn btn-outline-dark rounded-0 text-uppercase fw-medium">
                                             Xem giỏ hàng

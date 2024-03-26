@@ -66,7 +66,7 @@
                             <h1 style="font-size: 18px; font-weight: 700; letter-spacing: 1px"></h1>
                         </div>
                         <div class="banner-product mb-3">
-                            <img src="{{ asset('images/banner/women-day-2024-cata-1140x500.png') }}"
+                            <img src="https://ik.imagekit.io/fi1c554v7/banner/600x1920-Banner_1920x.jpg_v=1613523908"
                                 style="max-width: 100%; height: auto;" alt="banner">
                         </div>
                         <div class="content-top">
@@ -97,9 +97,7 @@
                                         <div class="product-layout border">
                                             <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
                                                 class="img-product d-block position-relative">
-                                                {{-- <img src="{{ asset('images/shoes/nike/giay-nike-run-swift-3-nam-xanh-01-500x500.jpg') }}"
-                                                    class="object-fit-cover w-100 h-100" alt="shoes"> --}}
-                                                    <img loading="lazy" srcset="https://ik.imagekit.io/fi1c554v7/shoes/Nike/giay-nike-air-zoom-pegasus-40-premium-nam-xanh-lam-05-800x800.jpg?updatedAt=1711079649057"
+                                                    <img loading="lazy" srcset="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
                                                     class="object-fit-cover w-100 h-100" alt="shoes">
                                                 <div class="bottom-bar"></div>
                                             </a>

@@ -27,7 +27,7 @@ $(document).ready(function () {
                         <a href="">${item['name']}</a>
                         <small><br>Size ${item['size']}</small>
                     </td>
-                    <td class="text-end td-qty">x${item['quantity']}</td>
+                    <td class="text-end td-qty">${item['quantity']}</td>
                     <td class="text-end td-total">${item['totalPrice']}</td>
                     <td class="text-end td-remove">
                         <button type="button" title="Loại bỏ" class="cart-remove" data-id="${item['product_id']}" data-size="${item['size']}">

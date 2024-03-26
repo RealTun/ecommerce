@@ -141,7 +141,7 @@
                 </div>
                 <div class="col-md-6">
                     <a href="" class="text-center d-block">
-                        <img src="{{ asset('images/banner/sieu-sale-slide-3-3-1240x1000h.png') }}"
+                        <img src="https://myshoes.vn/image/cache/catalog/2024/banner/ms-slide-1-1240x1000h.png"
                             style="height: 468px; width: 585px;" alt="center_slide">
                     </a>
                 </div>

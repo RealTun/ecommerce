@@ -22,11 +22,16 @@ class AccountController extends Controller
   {
     if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
       $products = Product::limit(20)->get();
+      foreach ($products as $each) {
+        $each->path = DB::table('image')->join('product', 'product_id', '=', 'product.id')
+          ->where('product_id', '=', $each->id)
+          ->value('path');
+      }
       $exist_shopping_session = DB::table('shopping_session')
-                                ->join('user', 'user.id', '=', 'shopping_session.user_id')
-                                ->where('user.id', Auth::user()->id)
-                                ->exists();
-      if(!$exist_shopping_session){
+        ->join('user', 'user.id', '=', 'shopping_session.user_id')
+        ->where('user.id', Auth::user()->id)
+        ->exists();
+      if (!$exist_shopping_session) {
         DB::table('shopping_session')->insert([
           'user_id' => Auth::user()->id,
         ]);
@@ -39,8 +44,7 @@ class AccountController extends Controller
   public function logout()
   {
     Auth::logout();
-    $products = Product::limit(20)->get();
-    return redirect()->route('web.home', compact('products'));
+    return redirect()->route('web.login');
   }
 
   public function register()

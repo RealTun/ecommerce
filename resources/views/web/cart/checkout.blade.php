@@ -132,8 +132,8 @@
                                     data-value="{{ $each->product_id }}"class="align-middle border border-emerald-500">
                                     <input type="hidden" name="totalPrice" id="price" value="{{ $each->price }}">
                                     <td class="text-center">
-                                        <img src="https://myshoes.vn/image/cache/catalog/2024/adidas/ad1/giay-adidas-run-80s-nam-xam-trang-01-60x60.jpg"
-                                            alt="">
+                                        {{-- <img srcset="https://ik.imagekit.io/b78avuku4/{{ $each->path }}" --}}
+                                            {{-- alt="shoes"> --}}
                                     </td>
                                     <td>
                                         <a class="product-name"
@@ -204,9 +204,13 @@
                                 </tr>
                             </table>
                         </div>
-                        <a href="{{ route('web.sendMail') }}" class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
-                            Thanh toán
-                        </a>
+                        <form action="{{route('web.sendMail')}}" method="post">
+                            @csrf
+                            <button type="submit" href="{{ route('web.sendMail') }}" id="btn-checkout"
+                                class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
+                                Thanh toán
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -252,6 +256,15 @@
                 let price = inputElement.val();
                 $(rowElement).find(".text-tp").html(numberFormat(price * $(this).val()) + " VNĐ");
             });
+
+            let successMessage = '{{ session('success') }}';
+            if (successMessage) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Bạn đã đặt hàng thành công! Vui lòng kiểm tra email",
+                    showConfirmButton: true,
+                });
+            }
         });
     </script>
 @endpush
