@@ -31,32 +31,27 @@
             @yield('content')
             {{-- @include('web.layouts.feedback') --}}
         </main>
+        <div id="toast-container" class="toast-container d-none position-fixed top-0 end-0 pt-5 pe-3">
+            <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body"></div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
         <footer style="background-color: #0f3057; color: white">
             @include('web.layouts.footer')
         </footer>
     </div>
-    <script type="text/javascript" id="zsiqchat">
-        var $zoho = $zoho || {};
-        $zoho.salesiq = $zoho.salesiq || {
-            widgetcode: "siq5a328d2fae7d1cdc9f4859ef1d8561c69ffcc8cdb2b14317a4642b5566ec7706",
-            values: {},
-            ready: function() {}
-        };
-        var d = document;
-        s = d.createElement("script");
-        s.type = "text/javascript";
-        s.id = "zsiqscript";
-        s.defer = true;
-        s.src = "https://salesiq.zohopublic.com/widget";
-        t = d.getElementsByTagName("script")[0];
-        t.parentNode.insertBefore(s, t);
-    </script>
+    <div id="cover-spin"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/showCart.js') }}"></script>
     <script src="{{ asset('js/cart.js') }}"></script>
+    <script src="{{ asset('js/HandleAuthentication.js') }}"></script>
     @stack('javascript')
 </body>
 

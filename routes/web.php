@@ -6,6 +6,24 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\web\AccountController;
+use App\Http\Controllers\web\ApiController;
+
+// RESTful API
+Route::prefix('api')->group(function(){
+  // V1
+  Route::prefix('v1')->group(function(){
+      // api/v1/products
+      Route::prefix('products')->group(function(){
+        Route::get('/', [ApiController::class, 'getProducts']);
+        Route::get('/{id}', [ApiController::class, 'getProduct']);
+      });
+
+      Route::prefix('users')->group(function(){
+        Route::get('/', [ApiController::class, 'getUsers']);
+        Route::get('/{id}', [ApiController::class, 'getUser']);
+      });
+  });
+});
 
 Route::get('/login', [AccountController::class, 'login'])->name('web.login');
 Route::get('/register', [AccountController::class, 'register'])->name('web.register');

@@ -417,7 +417,7 @@
         </div>
     </div>
     @include('web.layouts.feedback')
-    <div id="toast-container" class="toast-container d-none position-fixed top-0 end-0 pt-5 pe-3">
+    {{-- <div id="toast-container" class="toast-container d-none position-fixed top-0 end-0 pt-5 pe-3">
         <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body"></div>
@@ -425,7 +425,7 @@
                     aria-label="Close"></button>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('javascript')

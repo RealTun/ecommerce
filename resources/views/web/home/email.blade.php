@@ -34,6 +34,8 @@
             <th>Sản phẩm</th>
             <th>Kích cỡ</th>
             <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Tổng tiền</th>
         </thead>
         @php
             $count = 1;
@@ -47,8 +49,18 @@
                     </td>
                     <td>{{ $item->size }}</td>
                     <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->price }}</td>
+                    <td class="price">{{ $item->totalPriceFormatted }}</td>
                 </tr>
             @endforeach
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$total}}</td>
+            </tr>
         </tbody>
     </table>
 

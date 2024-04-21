@@ -217,13 +217,21 @@
 
 @push('javascript')
     <script type="text/javascript">
-        let brand = $('.brand a');
-        // console.log(brand);
-        brand.each(function(hell) {
-            let slug = `giay-${$(this).text().toLowerCase()}`;
-            let id_p = $(this).attr('data-id');
-            let route = `/thoi-trang/${slug}/${id_p}`;
-            $(this).parent().prev().attr('href', route);
+        $(document).ready(function() {
+            let brand = $('.brand a');
+            brand.each(function(hell) {
+                let slug = `giay-${$(this).text().toLowerCase()}`;
+                let id_p = $(this).attr('data-id');
+                let route = `/thoi-trang/${slug}/${id_p}`;
+                $(this).parent().prev().attr('href', route);
+            });
+
+            // 
+            let stateUser = '{{ session('state') }}';
+            // console.log(stateUser);
+            if (stateUser != null) {
+                window.localStorage.setItem('isLogin', 'yes');
+            }
         });
     </script>
 @endpush

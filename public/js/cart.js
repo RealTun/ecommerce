@@ -119,6 +119,7 @@ $(document).ready(function () {
   });
 
   $(document).off('click').on('click', '.cart-remove', function () {
+    $('#cover-spin').show(0);
     let id_p = $(this).attr('data-id');
     let size = $(this).attr('data-size');
     $.ajax({
@@ -134,7 +135,9 @@ $(document).ready(function () {
       success: function (response) {
         LoadCart();
         ShowToast(response);
-        console.log(response);
+        setTimeout(function() {
+          $('#cover-spin').hide();
+        }, 2000);
       },
       error: function (error) {
         console.log(error.responseText);

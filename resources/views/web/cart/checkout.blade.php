@@ -133,7 +133,7 @@
                                     <input type="hidden" name="totalPrice" id="price" value="{{ $each->price }}">
                                     <td class="text-center">
                                         {{-- <img srcset="https://ik.imagekit.io/b78avuku4/{{ $each->path }}" --}}
-                                            {{-- alt="shoes"> --}}
+                                        {{-- alt="shoes"> --}}
                                     </td>
                                     <td>
                                         <a class="product-name"
@@ -204,7 +204,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <form action="{{route('web.sendMail')}}" method="post">
+                        <form action="{{ route('web.sendMail') }}" method="post">
                             @csrf
                             <button type="submit" href="{{ route('web.sendMail') }}" id="btn-checkout"
                                 class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
@@ -258,10 +258,18 @@
             });
 
             let successMessage = '{{ session('success') }}';
+            let errorMessage = '{{ session('error') }}';
             if (successMessage) {
                 Swal.fire({
                     icon: "success",
                     title: "Bạn đã đặt hàng thành công! Vui lòng kiểm tra email",
+                    showConfirmButton: true,
+                });
+            }
+            if (errorMessage) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Giỏ hàng của bạn đang trống!",
                     showConfirmButton: true,
                 });
             }

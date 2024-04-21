@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
-  //
   public function login()
   {
     return view('web.auth.login');
@@ -36,7 +35,14 @@ class AccountController extends Controller
           'user_id' => Auth::user()->id,
         ]);
       }
-      return view('web.home.index', compact('products'));
+      // return view('web.home.index', compact([
+      //   "products" => $products,
+      //   "state" => "Đăng nhập thành công"
+      // ]));
+      return redirect()->route('web.home')->with([
+        "products" => $products,
+        "state" => "Đăng nhập thành công"
+      ]);
     }
     return redirect()->back()->with('error', 'Thông tin tài khoản không chính xác!');
   }
@@ -44,7 +50,7 @@ class AccountController extends Controller
   public function logout()
   {
     Auth::logout();
-    return redirect()->route('web.login');
+    return redirect()->route('web.login')->with("state", "Đăng xuất thành công");
   }
 
   public function register()

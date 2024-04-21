@@ -199,8 +199,33 @@ class WebController extends Controller
         ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
         ->where('user_id', Auth::user()->id)
         ->get();
-    $mail->with(['data' => $product_cart]);
+    if(!count($product_cart)){
+      return redirect()->back()->with('error', "Chúng tôi đã tiếp nhận email của bạn!!");
+    }
+    $totalPrice = 0;
+    foreach($product_cart as $item){
+      if ($item->sale == 0) {
+        $item->price = $item->price * 3000;
+      } else {
+        $adjustPrice = $item->price * 3000;
+        $item->price = $adjustPrice - ($adjustPrice * ($item->sale / 100));
+      }
+      $item->price = ceil($item->price / 1000) * 1000;
+      if ($item->quantity != 0)
+        $item->totalPrice = $item->quantity * $item->price;
+      $item->productIdFormatted = strlen($item->product_id) == 1 ? '00' . $item->product_id : '0' . $item->product_id;
+      $item->priceFormatted  = number_format($item->price, 0, ',', '.') . ' VNĐ';
+      $item->totalPriceFormatted = number_format($item->totalPrice, 0, ',', '.') . ' VNĐ';
+      $totalPrice += $item->totalPrice;
+    }
+    $totalPriceFormatted = number_format($totalPrice, 0, ',', '.') . ' VNĐ';
+    $mail->with(['data' => $product_cart, 'total' => $totalPriceFormatted]);
     Mail::to(Auth::user()->email)->send($mail);
+    DB::table('cart_item')
+        ->join('product', 'product.id', '=', 'cart_item.product_id')
+        ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
+        ->where('user_id', Auth::user()->id)
+        ->delete();
     return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
   }
 }

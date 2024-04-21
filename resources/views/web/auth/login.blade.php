@@ -140,6 +140,12 @@
                 $('.alert-danger').fadeOut();
                 $('.alert-success').fadeOut();
             }, 3000); // Adjust the duration (in milliseconds) as needed
+
+            let stateUser = '{{ session('state') }}';
+            // console.log(stateUser);
+            if (stateUser != null) {
+                window.localStorage.setItem('isLogin', 'no');
+            }
         });
     </script>
 @endpush
