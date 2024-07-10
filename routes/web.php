@@ -7,21 +7,22 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\web\WebController;
 use App\Http\Controllers\web\AccountController;
 use App\Http\Controllers\web\ApiController;
+use App\Http\Controllers\web\OrderController;
 
 // RESTful API
-Route::prefix('api')->group(function(){
+Route::prefix('api')->group(function () {
   // V1
-  Route::prefix('v1')->group(function(){
-      // api/v1/products
-      Route::prefix('products')->group(function(){
-        Route::get('/', [ApiController::class, 'getProducts']);
-        Route::get('/{id}', [ApiController::class, 'getProduct']);
-      });
+  Route::prefix('v1')->group(function () {
+    // api/v1/products
+    Route::prefix('products')->group(function () {
+      Route::get('/', [ApiController::class, 'getProducts']);
+      Route::get('/{id}', [ApiController::class, 'getProduct']);
+    });
 
-      Route::prefix('users')->group(function(){
-        Route::get('/', [ApiController::class, 'getUsers']);
-        Route::get('/{id}', [ApiController::class, 'getUser']);
-      });
+    Route::prefix('users')->group(function () {
+      Route::get('/', [ApiController::class, 'getUsers']);
+      Route::get('/{id}', [ApiController::class, 'getUser']);
+    });
   });
 });
 
@@ -30,7 +31,7 @@ Route::get('/register', [AccountController::class, 'register'])->name('web.regis
 Route::get('/account/logout', [AccountController::class, 'logout'])->name('web.logout');
 Route::post('/account/store', [AccountController::class, 'storeAccount'])->name('web.storeAccount');
 Route::post('/', [AccountController::class, 'checkLogin'])->name('web.checklogin');
-Route::get('/account/forgot-password', [AccountController::class, ''])->name('web.forgotpassword');
+Route::get('/account/forgot-password', [AccountController::class, 'forgotPassword'])->name('web.forgotpassword');
 Route::get('/', [WebController::class, 'index'])->name('web.home');
 Route::get('/contact', [WebController::class, 'contact'])->name('web.contact');
 Route::post('/sendContact', [WebController::class, 'sendContact'])->name('web.sendContact');
@@ -44,6 +45,17 @@ Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])-
 Route::middleware('auth')->group(function () {
   Route::post('/addToCart', [WebController::class, 'addToCart']);
   Route::get('/checkout', [WebController::class, 'showCheckout'])->name('showCheckout');
+  // checkout & payment
+  Route::post('/create-payment-link', [OrderController::class, 'createPaymentLink'])->name('web.createPayment');
+  Route::prefix('/order')->group(function () {
+    Route::post('/create', [OrderController::class, 'createOrder']);
+    Route::get('/{id}', [OrderController::class, 'getPaymentLinkInfoOfOrder']);
+    Route::put('/{id}', [OrderController::class, 'cancelPaymentLinkOfOrder']);
+  });
+
+  Route::prefix('/payment')->group(function () {
+    Route::post('/payos', [OrderController::class, 'handlePayOSWebhook']);
+  });
 });
 Route::post('/deleteItemCart', [WebController::class, 'deleteItemCart']);
 Route::post('/showItemCart', [WebController::class, 'showItemCart']);

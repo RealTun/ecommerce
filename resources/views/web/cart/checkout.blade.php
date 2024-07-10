@@ -94,8 +94,13 @@
                         Trang chủ
                     </li>
                     <li class="breadcrumb-item">
-                        Giày chính hãng
+                        Giỏ hàng
                     </li>
+                    @php
+                    if(isset($_GET['status'])){
+                        echo $_GET['status'];
+                    }
+                @endphp
                 </ol>
             </nav>
         </div>
@@ -204,9 +209,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <form action="{{ route('web.sendMail') }}" method="post">
+                        <form action="{{ route('web.createPayment') }}" method="post">
                             @csrf
-                            <button type="submit" href="{{ route('web.sendMail') }}" id="btn-checkout"
+                            <button type="submit" id="btn-checkout"
                                 class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
                                 Thanh toán
                             </button>

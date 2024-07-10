@@ -200,7 +200,7 @@ class WebController extends Controller
         ->where('user_id', Auth::user()->id)
         ->get();
     if(!count($product_cart)){
-      return redirect()->back()->with('error', "Chúng tôi đã tiếp nhận email của bạn!!");
+      return redirect()->back()->with('error', "Giỏ hàng của bạn đang trống!");
     }
     $totalPrice = 0;
     foreach($product_cart as $item){
@@ -226,6 +226,6 @@ class WebController extends Controller
         ->join('shopping_session', 'shopping_session.id', '=', 'cart_item.session_id')
         ->where('user_id', Auth::user()->id)
         ->delete();
-    return redirect()->back()->with('success', "Chúng tôi đã tiếp nhận email của bạn!!");
+    return redirect()->back()->with('success', "Bạn đã đặt hàng thành công! Vui lòng kiểm tra email!");
   }
 }
