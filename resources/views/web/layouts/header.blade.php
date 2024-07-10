@@ -116,6 +116,11 @@
         color: #000;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
+
+    .list-item-account {
+        position: absolute;
+        z-index: 9999;
+    }
 </style>
 
 <div class="container p-0">
@@ -137,13 +142,23 @@
         </div>
         <div class="cart-user d-flex justify-content-end gap-2" style="flex: 1;">
             @if (Auth::check())
-                <a href="{{ route('web.logout') }}" class="d-flex text-white text-decoration-none">
+                <div class="d-flex text-white text-decoration-none">
                     <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
                     <div style="min-width: 110px;">
                         <span style="font-size: 12px">Xin chào {{ Auth::user()->name }}</span>
-                        <div style="font-size: 11px">Đăng xuất</div>
+                        <div style="font-size: 10px">Chỉnh sửa/Thoát</div>
+                        <div class="list-group list-item-account d-none">
+                            <a href="#" class="list-group-item list-group-item-action" style="font-size: 12px"
+                                aria-current="true">
+                                Tài khoản của tôi
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action"
+                                style="font-size: 12px">Lịch sử đơn hàng</a>
+                            <a href="{{ route('web.logout') }}" class="list-group-item list-group-item-action"
+                                style="font-size: 12px">Đăng xuất</a>
+                        </div>
                     </div>
-                </a>
+                </div>
             @else
                 <a href="{{ route('web.login') }}" class="d-flex text-white text-decoration-none">
                     <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
@@ -251,6 +266,24 @@
                     header.removeClass('d-flex justify-content-around fixed-top me-1');
                 }
             });
+
+            let list_item = $('.list-item-account');
+            let cart_user = $('.cart-user div');
+
+            $(cart_user).hover(function () {
+                    list_item.removeClass('d-none');
+                }, function () {
+                    list_item.addClass('d-none');
+                }
+            );
+
+            $(list_item).hover(function () {
+                    // over
+                    
+                }, function () {
+                    list_item.addClass('d-none');
+                }
+            );
         });
     </script>
 @endpush
