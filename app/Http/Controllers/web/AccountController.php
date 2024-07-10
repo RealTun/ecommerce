@@ -9,6 +9,7 @@ use App\Http\Requests\Account\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -68,5 +69,18 @@ class AccountController extends Controller
 
   public function forgotPassword()
   {
+  }
+
+  public function updateInfo(Request $request)
+  {
+    $user = Auth::user();
+  }
+
+  public function updatePassword(Request $request)
+  {
+    $user = Auth::user();
+    $user->password = Hash::make($request->password);
+    $user->save();
+    return redirect()->route('web.account.index')->with('success', 'Thay đổi mật khẩu thành công!');
   }
 }
