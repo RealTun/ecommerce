@@ -57,9 +57,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/payos', [OrderController::class, 'handlePayOSWebhook']);
   });
   
-  Route::prefix('account')->group(function(){
+  Route::prefix('/account')->group(function () {
+    // info
     Route::patch('/updateInfo', [AccountController::class, 'updateInfo'])->name('web.account.updateinfo');
     Route::patch('/change-password', [AccountController::class, 'updatePassword'])->name('web.account.updatePassword');
+    //order
+    Route::get('', [AccountController::class, 'index'])->name('web.account.index');
+    Route::get('history', [AccountController::class, 'indexHistory'])->name('web.order.history');
+    Route::get('order/{id}', [AccountController::class, 'indexOrder'])->name('web.order.detail');
   });
 });
 Route::post('/deleteItemCart', [WebController::class, 'deleteItemCart']);
