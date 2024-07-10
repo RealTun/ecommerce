@@ -57,6 +57,16 @@
         border-radius: 0;
     }
 
+    #cart-content::after {
+        content: '';
+        position: absolute;
+        top: -24px;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+    }
+
     #cart-content::before {
         content: "";
         display: block;
@@ -142,17 +152,17 @@
         </div>
         <div class="cart-user d-flex justify-content-end gap-2" style="flex: 1;">
             @if (Auth::check())
-                <div class="d-flex text-white text-decoration-none">
+                <div class="user-wrapper d-flex text-white text-decoration-none">
                     <i class="bi bi-person-lock mx-1" style="font-size: 1.8rem"></i>
                     <div style="min-width: 110px;">
                         <span style="font-size: 12px">Xin chào {{ Auth::user()->name }}</span>
                         <div style="font-size: 10px">Chỉnh sửa/Thoát</div>
                         <div class="list-group list-item-account d-none">
-                            <a href="#" class="list-group-item list-group-item-action" style="font-size: 12px"
-                                aria-current="true">
+                            <a href="{{ route('web.account.index') }}" class="list-group-item list-group-item-action"
+                                style="font-size: 12px" aria-current="true">
                                 Tài khoản của tôi
                             </a>
-                            <a href="#" class="list-group-item list-group-item-action"
+                            <a href="{{ route('web.order.history') }}" class="list-group-item list-group-item-action"
                                 style="font-size: 12px">Lịch sử đơn hàng</a>
                             <a href="{{ route('web.logout') }}" class="list-group-item list-group-item-action"
                                 style="font-size: 12px">Đăng xuất</a>
@@ -268,22 +278,20 @@
             });
 
             let list_item = $('.list-item-account');
-            let cart_user = $('.cart-user div');
+            let cart_user = $('.cart-user .user-wrapper');
 
-            $(cart_user).hover(function () {
-                    list_item.removeClass('d-none');
-                }, function () {
-                    list_item.addClass('d-none');
-                }
-            );
+            $(cart_user).hover(function() {
+                list_item.removeClass('d-none');
+            }, function() {
+                list_item.addClass('d-none');
+            });
 
-            $(list_item).hover(function () {
-                    // over
-                    
-                }, function () {
-                    list_item.addClass('d-none');
-                }
-            );
+            $(list_item).hover(function() {
+                // over
+
+            }, function() {
+                list_item.addClass('d-none');
+            });
         });
     </script>
 @endpush

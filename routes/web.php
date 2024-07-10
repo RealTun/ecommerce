@@ -56,6 +56,12 @@ Route::middleware('auth')->group(function () {
   Route::prefix('/payment')->group(function () {
     Route::post('/payos', [OrderController::class, 'handlePayOSWebhook']);
   });
+
+  Route::prefix('/account')->group(function () {
+    Route::get('', [AccountController::class, 'index'])->name('web.account.index');
+    Route::get('history', [AccountController::class, 'indexHistory'])->name('web.order.history');
+    Route::get('order/{id}', [AccountController::class, 'indexOrder'])->name('web.order.detail');
+  });
 });
 Route::post('/deleteItemCart', [WebController::class, 'deleteItemCart']);
 Route::post('/showItemCart', [WebController::class, 'showItemCart']);

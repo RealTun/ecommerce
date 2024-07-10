@@ -97,10 +97,10 @@
                         Giỏ hàng
                     </li>
                     @php
-                    if(isset($_GET['status'])){
-                        echo $_GET['status'];
-                    }
-                @endphp
+                        if (isset($_GET['status'])) {
+                            echo $_GET['status'];
+                        }
+                    @endphp
                 </ol>
             </nav>
         </div>
@@ -211,8 +211,8 @@
                         </div>
                         <form action="{{ route('web.createPayment') }}" method="post">
                             @csrf
-                            <button type="submit" id="btn-checkout"
-                                class="btn btn-pay rounded-0 text-uppercase fw-medium" style="font-size: 14px;">
+                            <button type="submit" id="btn-checkout" class="btn btn-pay rounded-0 text-uppercase fw-medium"
+                                style="font-size: 14px;">
                                 Thanh toán
                             </button>
                         </form>

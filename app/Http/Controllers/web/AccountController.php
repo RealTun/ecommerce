@@ -69,4 +69,22 @@ class AccountController extends Controller
   public function forgotPassword()
   {
   }
+  public function index()
+  {
+    return view('web.account.index');
+  }
+  public function indexHistory()
+  {
+    $data = DB::table('Order')->where('user_id', Auth::user()->id)->get();
+    if ($data->isEmpty()) {
+      session()->flash('state', 'Bạn chưa có đơn hàng nào!');
+    }
+    return view('web.account.history_order', compact('data'));
+  }
+  public function indexOrder(string $id)
+  {
+    $order = DB::table('Order')->where('id', $id)->first();
+    $products = DB::table('order_items')->where('order_id', $id)->get();
+    return view('web.account.show', compact('order', 'products'));
+  }
 }

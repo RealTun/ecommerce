@@ -29,14 +29,18 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="odd gradeX" align="center">
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>@if ($user->is_admin == 1)
-                                    x
-                                @endif</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.users.delete', $user->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.users.edit', $user->id)}}">Edit</a></td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    @if ($user->is_admin == 1)
+                                        x
+                                    @endif
+                                </td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a
+                                        href="{{ route('admin.users.delete', $user->id) }}"> Delete</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a
+                                        href="{{ route('admin.users.edit', $user->id) }}">Edit</a></td>
                             </tr>
                         @endforeach
                     </tbody>
