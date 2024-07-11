@@ -59,8 +59,11 @@ Route::middleware('auth')->group(function () {
   
   Route::prefix('/account')->group(function () {
     // info
+    Route::get('/change-info', [AccountController::class, 'viewUpdateInfo'])->name('web.account.view.updateinfo');
     Route::patch('/updateInfo', [AccountController::class, 'updateInfo'])->name('web.account.updateinfo');
-    Route::patch('/change-password', [AccountController::class, 'updatePassword'])->name('web.account.updatePassword');
+    //change password
+    Route::get('/change-password', [AccountController::class, 'viewChangePassword'])->name('web.account.view.changepassword');
+    Route::patch('/updatePassword', [AccountController::class, 'updatePassword'])->name('web.account.updatePassword');
     //order
     Route::get('', [AccountController::class, 'index'])->name('web.account.index');
     Route::get('history', [AccountController::class, 'indexHistory'])->name('web.order.history');

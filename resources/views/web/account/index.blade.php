@@ -25,6 +25,16 @@
 @section('content')
     <div class="container">
         <div class="row px-5 py-4">
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible" style="font-size: 14px">
+                    <i class="fa fa-exclamation-circle"></i> Lỗi: {{ session('error') }}
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible" style="font-size: 14px">
+                    <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
+                </div>
+            @endif
             <div class="col-md-2 p-0">
                 <a href="" class="text-start d-block">
                     <img class="img-fluid" src="{{ asset('images/banner/slide-trai-20-300x500h.png') }}" alt="left_slide">
@@ -36,10 +46,10 @@
                         Thông tin tài khoản
                     </h4>
                     <div class="wrapper d-flex justify-content-start align-items-center gap-5">
-                        <a class="account_link" href="#">
+                        <a class="account_link" href="{{ route('web.account.view.updateinfo') }}">
                             <span>Sửa thông tin tài khoản</span>
                         </a>
-                        <a class="account_link" href="#">
+                        <a class="account_link" href="{{ route('web.account.view.changepassword') }}">
                             <span>Thay đổi mật khẩu</span>
                         </a>
                         <a class="account_link" href="#">
@@ -75,5 +85,12 @@
 @endsection
 
 @push('javascript')
-    <script></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert-danger').fadeOut();
+                $('.alert-success').fadeOut();
+            }, 3000);
+        });
+    </script>
 @endpush

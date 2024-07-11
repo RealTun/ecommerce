@@ -71,13 +71,35 @@ class AccountController extends Controller
   {
   }
 
+  public function viewUpdateInfo()
+  {
+    $user = Auth::user();
+    return view('web.account.change_info', ['user' => $user]);
+  }
+
   public function updateInfo(Request $request)
   {
     $user = Auth::user();
+    $user->name = $request->name;
+    $user->telephone = $request->phone;
+    $user->save();
+    return redirect()->route('web.account.index')->with('success', 'Thay đổi thông tin tài khoản thành công!');
+  }
+
+  public function viewChangePassword()
+  {
+    return view('web.account.change_password');
   }
 
   public function updatePassword(Request $request)
   {
+    if(strlen($request->password) < 6 || strlen($request->password) > 20){
+      return back()->with('error', "Mật khẩu phải từ 6 -> 20 ký tự!");
+    }
+
+    if($request->password != $request->cf_password){
+      return back()->with('error', "Mật khẩu phải trùng khớp!");
+    }
     $user = Auth::user();
     $user->password = Hash::make($request->password);
     $user->save();

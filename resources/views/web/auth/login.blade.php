@@ -4,7 +4,7 @@
 
 @push('css')
     <style>
-        input[type="text"],
+        input[type="email"],
         input[type="password"] {
             outline: none;
             box-shadow: none !important;
