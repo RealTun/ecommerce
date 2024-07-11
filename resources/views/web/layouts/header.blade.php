@@ -216,29 +216,29 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav navbar-nav-scroll" style="font-size: 15px" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-nike') }}">Giày
+                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandProducts', ['giay-nike', 1]) }}">Giày
                             Nike</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-adidas') }}">Giày
+                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandProducts', ['giay-adidas', 1]) }}">Giày
                             Adidas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-puma') }}">Giày
+                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandProducts', ['giay-puma', 1]) }}">Giày
                             Puma</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold"
-                            href="{{ route('web.brandIndex', 'giay-new-balance') }}">Giày
+                            href="{{ route('web.brandProducts', ['giay-new-balance', 1]) }}">Giày
                             New Balance</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandIndex', 'giay-vans') }}">Giày
+                        <a class="nav-link text-white fw-bold" href="{{ route('web.brandProducts', ['giay-vans', 1]) }}">Giày
                             Vans</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white fw-bold"
-                            href="{{ route('web.brandIndex', 'giay-converse') }}">Giày
+                            href="{{ route('web.brandProducts', ['giay-converse', 1]) }}">Giày
                             Converse</a>
                     </li>
                     <li class="nav-item">

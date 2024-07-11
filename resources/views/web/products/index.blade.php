@@ -51,6 +51,76 @@
             background-color: #0a437f;
             transition: transform 0.5s ease-in;
         }
+
+        .pagination-outer {
+            text-align: center;
+        }
+
+        .pagination {
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            position: relative;
+        }
+
+        .pagination li a.page-link {
+            color: #1e64b5;
+            background: transparent;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 40px;
+            height: 40px;
+            width: 40px;
+            padding: 0;
+            margin: 0 5px;
+            border: none;
+            border-radius: 0;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease 0s;
+        }
+
+        .pagination li a.page-link:hover,
+        .pagination li a.page-link:focus,
+        .pagination li.active a.page-link:hover,
+        .pagination li.active a.page-link {
+            color: #fff;
+            background: transparent;
+        }
+
+        .pagination li a.page-link:before {
+            content: '';
+            background-color: #e7e7e7;
+            height: 100%;
+            width: 100%;
+            transform: perspective(100px) rotateX(50deg);
+            transform-origin: bottom center;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: all 0.3s ease 0s;
+        }
+
+        .pagination li a.page-link:hover:before,
+        .pagination li a.page-link:focus:before,
+        .pagination li.active a.page-link:hover:before,
+        .pagination li.active a.page-link:before {
+            background-color: #1e64b5;
+            transform: perspective(100px) rotateX(0);
+        }
+
+        @media only screen and (max-width: 480px) {
+            .pagination {
+                font-size: 0;
+                display: inline-block;
+            }
+
+            .pagination li {
+                display: inline-block;
+                vertical-align: top;
+                margin: 10px 0;
+            }
+        }
     </style>
 @endpush
 
@@ -92,12 +162,13 @@
                         </div>
                         <div class="product-content">
                             <div class="row g-0 pt-4">
-                                @foreach ($brand->products as $product)
+                                @foreach ($products as $product)
                                     <div class="col-md-3">
                                         <div class="product-layout border">
                                             <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
                                                 class="img-product d-block position-relative">
-                                                    <img loading="lazy" srcset="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
+                                                <img loading="lazy"
+                                                    srcset="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
                                                     class="object-fit-cover w-100 h-100" alt="shoes">
                                                 <div class="bottom-bar"></div>
                                             </a>
@@ -125,6 +196,40 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                        <div class="demo mt-2 d-flex justify-content-end">
+                            <nav class="pagination-outer" aria-label="Page navigation">
+                                <ul class="pagination">
+                                    @if ($pageNumber > 1)
+                                        <li class="page-item">
+                                            <a href="{{ route('web.brandProducts', [$brand->slug, $pageNumber - 1]) }}"
+                                                class="page-link" aria-label="Previous">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
+                                    @else
+                                    @endif
+                                    @for ($i = 1; $i <= $count_page; $i++)
+                                        @if ($i == $pageNumber)
+                                            <li class="page-item active"><a class="page-link"
+                                                    href="{{ route('web.brandProducts', [$brand->slug, $i]) }}">{{ $i }}</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item"><a class="page-link"
+                                                    href="{{ route('web.brandProducts', [$brand->slug, $i]) }}">{{ $i }}</a>
+                                            </li>
+                                        @endif
+                                    @endfor
+                                    @if ($pageNumber < $count_page)
+                                        <li class="page-item">
+                                            <a href="{{ route('web.brandProducts', [$brand->slug, $pageNumber + 1]) }}"
+                                                class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

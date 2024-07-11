@@ -24,15 +24,27 @@ class WebController extends Controller
     return view('web.home.index', compact('products'));
   }
 
-  public function brandIndex(string $slug)
+  public function brandProducts(string $slug, int $pageNumber = 1)
   {
+    if($pageNumber < 1){
+      return back()->with('error', "Yêu cầu không hợp lệ!");
+    }
+
+    // get data
     $brand = ProductBrand::where('slug', $slug)->first();
-    foreach($brand->products as $each){
+    $products = $brand->products();
+
+    // pagination
+    $pageSize = 12;
+    $skipSize = ($pageNumber-1) * $pageSize;
+    $count_page = ceil($brand->products()->count() / $pageSize);
+    $products = $products->skip($skipSize)->take($pageSize)->get();
+    foreach($products as $each){
       $each->path = DB::table('image')->join('product', 'product_id', '=', 'product.id')
         ->where('product_id', '=', $each->id)
         ->value('path');
     }
-    return view('web.products.index', compact('brand'));
+    return view('web.products.index', compact('brand', 'products', 'count_page', 'pageNumber'));
   }
 
   public function detailsProduct(string $slug, string $id)

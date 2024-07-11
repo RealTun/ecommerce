@@ -37,7 +37,7 @@ Route::get('/contact', [WebController::class, 'contact'])->name('web.contact');
 Route::post('/sendContact', [WebController::class, 'sendContact'])->name('web.sendContact');
 Route::post('/sendMail', [WebController::class, 'sendMail'])->name('web.sendMail');
 
-Route::get('/thoi-trang/{slug}', [WebController::class, 'brandIndex'])->name('web.brandIndex');
+Route::get('/thoi-trang/{slug}/page={pageNumber}', [WebController::class, 'brandProducts'])->name('web.brandProducts');
 Route::get('/thoi-trang/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
 
 
