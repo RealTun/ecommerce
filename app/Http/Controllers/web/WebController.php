@@ -10,6 +10,7 @@ use App\Models\ProductBrand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Illuminate\Pipeline\Pipeline;
 
 class WebController extends Controller
 {
@@ -24,7 +25,7 @@ class WebController extends Controller
     return view('web.home.index', compact('products'));
   }
 
-  public function brandProducts(string $slug, int $pageNumber = 1)
+  public function brandProducts(Request $request, string $slug, int $pageNumber = 1)
   {
     if($pageNumber < 1){
       return back()->with('error', "Yêu cầu không hợp lệ!");
@@ -33,6 +34,13 @@ class WebController extends Controller
     // get data
     $brand = ProductBrand::where('slug', $slug)->first();
     $products = $brand->products();
+    $products = app(Pipeline::class)
+            ->send(Product::query())
+            ->through([
+                // \App\Filters\PaginationFilter::class,
+                \App\Filters\SortFilter::class, // Add the sort filter here
+            ])
+            ->thenReturn();
 
     // pagination
     $pageSize = 12;

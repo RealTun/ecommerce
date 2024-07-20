@@ -136,7 +136,7 @@
                             <h1 style="font-size: 18px; font-weight: 700; letter-spacing: 1px"></h1>
                         </div>
                         <div class="banner-product mb-3">
-                            <img src="https://ik.imagekit.io/fi1c554v7/banner/600x1920-Banner_1920x.jpg_v=1613523908"
+                            <img src="https://ik.imagekit.io/fi1c554v7/banner/banner_brand.png?updatedAt=1721406000077"
                                 style="max-width: 100%; height: auto;" alt="banner">
                         </div>
                         <div class="content-top">
@@ -254,6 +254,28 @@
                                     nhất. Tất cả sản phẩm đều được nhập khẩu và phân phối chính hãng. 30 ngày đổi hàng, bảo
                                     hành 6 tháng, miễn phí giao hàng toàn quốc.`)
                     }
+                });
+
+                $('.page-link').on('click', function(e) {
+                    e.preventDefault();
+                    let currentUrl = window.location.href;
+                    let pageNumber = null;
+                    let newUrl = null;
+
+                    if($(this).attr('aria-label') == "Previous"){
+                        let tempUrl = $(this).attr('href');
+                        pageNumber = tempUrl.charAt(tempUrl.length - 1);
+                    }
+                    else if ($(this).attr('aria-label') == "Next"){
+                        let tempUrl = $(this).attr('href');
+                        pageNumber = tempUrl.charAt(tempUrl.length - 1);
+                    }
+                    else{
+                        pageNumber = $(this).text();
+                    }
+
+                    newUrl = currentUrl.replace(/(page=)\d+/, '$1' + pageNumber);
+                    window.location.href = newUrl; // Redirect to the updated URL
                 });
             });
         </script>

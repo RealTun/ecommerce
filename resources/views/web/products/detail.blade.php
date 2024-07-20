@@ -325,7 +325,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="brand-image product-manufacturer">
-                                        <a class="d-block" href="{{ route('web.brandIndex', $product->brand->slug) }}">
+                                        <a class="d-block" href="{{ route('web.brandProducts', [$product->brand->slug, 1]) }}">
                                             <img src="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png"
                                                 srcset="https://myshoes.vn/image/cache/data/logo/adidas-70x70w.png 1x, https://myshoes.vn/image/cache/data/logo/adidas-140x140w.png 2x"
                                                 alt="Adidas" class="object-fit-cover">
