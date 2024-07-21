@@ -40,6 +40,10 @@ Route::post('/sendMail', [WebController::class, 'sendMail'])->name('web.sendMail
 Route::get('/giay-dep/{slug}/page={pageNumber}', [WebController::class, 'brandProducts'])->name('web.brandProducts');
 Route::get('/giay-dep/{slug}/{id}', [WebController::class, 'detailsProduct'])->name('web.detailsProduct');
 
+Route::get('error', function(){
+  return view('web.home.404');
+})->name('web.error');
+
 
 // process cart
 Route::middleware('auth')->group(function () {

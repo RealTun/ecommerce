@@ -27,15 +27,18 @@ class WebController extends Controller
 
   public function brandProducts(Request $request, string $slug, int $pageNumber = 1)
   {
-    if($pageNumber < 1){
-      return back()->with('error', "Yêu cầu không hợp lệ!");
+    $brand = ProductBrand::where('slug', $slug)->first();
+    $pageSize = 12;
+    $count_page = ceil($brand->products()->count() / $pageSize);
+
+    if($pageNumber < 1 || $pageNumber > $count_page){
+      return redirect()->route('web.error');
     }
 
     // get data
-    $brand = ProductBrand::where('slug', $slug)->first();
     $products = $brand->products();
     $products = app(Pipeline::class)
-            ->send(Product::query())
+            ->send($products)
             ->through([
                 \App\Filters\SizeFilter::class,
                 \App\Filters\SortFilter::class, // Add the sort filter here
@@ -43,9 +46,7 @@ class WebController extends Controller
             ->thenReturn();
 
     // pagination
-    $pageSize = 12;
     $skipSize = ($pageNumber-1) * $pageSize;
-    $count_page = ceil($brand->products()->count() / $pageSize);
     $products = $products->skip($skipSize)->take($pageSize)->get();
     foreach($products as $each){
       $each->path = DB::table('image')->join('product', 'product_id', '=', 'product.id')
