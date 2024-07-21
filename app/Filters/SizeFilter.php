@@ -10,10 +10,16 @@ class SizeFilter
     {
         $query = $request;
 
-        if (request()->has('sort_by')) {
-            $sortBy = request('sort_by');
-            $sortOrder = request('sort_order', 'asc'); // Default to ascending order
-            $query->skip($sortBy, $sortOrder);
+        if (request()->has('size')) {
+            $sizes = request('size');
+
+            $query->whereHas('inventories', function ($q) use ($sizes) {
+                if (is_array($sizes)) {
+                    $q->whereIn('size', $sizes);
+                } else {
+                    $q->where('size', $sizes);
+                }
+            });
         }
 
         return $next($query);

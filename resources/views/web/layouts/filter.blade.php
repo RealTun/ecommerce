@@ -57,7 +57,7 @@
 <div class="col-md-2 p-0">
     <aside class="column-left">
         <div class="filter-block pt-3 border-top border-dark">
-            <form action="{{route('web.brandProducts', [$brand->slug, 1])}}" method="get">
+            <form action="{{ route('web.brandProducts', [$brand->slug, 1]) }}" method="get">
                 <div class="module-title mb-3 d-flex justify-content-between align-items-center">
                     <h3 class="d-flex align-items-center m-0"
                         style="font-size: 16px; font-weight: 400; line-height: 1.2">TÌM
@@ -98,37 +98,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <hr>
-                    <div class="price-block">
-                        <div class="collapseFilter">
-                            <p class="d-flex justify-content-between align-items-center m-0 mb-2">
-                                <span class="fw-bold" style="cursor: pointer !important; font-size: 13px">GIÁ</span>
-                                <span><i class="bi bi-arrow-down" style="font-size: 13px"></i></span>
-                            </p>
-                            <div class="form-check" style="font-size: 14px">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Mặc định
-                                </label>
-                            </div>
-                            <div class="form-check" style="font-size: 14px">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault2" value="{{ request('min_price') }}" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Từ thấp đến cao
-                                </label>
-                            </div>
-                            <div class="form-check" style="font-size: 14px">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault3" value="{{ request('max_price') }}" checked>
-                                <label class="form-check-label" for="flexRadioDefault3">
-                                    Từ cao đến thấp
-                                </label>
-                            </div>
-                            <div class="mb-3"></div>
-                        </div>
-                    </div> --}}
                     <hr>
                     <div class="size-block">
                         <div class="collapseFilter" data-bs-target="#collapseSize">
@@ -137,14 +106,23 @@
                                     SIZE</span>
                                 <span><i class="bi bi-arrow-down" style="font-size: 13px"></i></span>
                             </p>
-                            <ul class="list-group cursor-pointer" id="collapseSize" data-bs-parent="#accordion">
+                            {{-- <ul class="list-group cursor-pointer" id="collapseSize" data-bs-parent="#accordion">
                                 @for ($i = 39; $i <= 43; $i++)
                                     <li class="list-group-item px-0 py-1 border-0" style="font-size: 14px">
-                                        <input class="form-check-input me-1 checkbox" type="checkbox" value=""
-                                            id="size{{ $i }}">
+                                        <input class="form-check-input me-1 checkbox" type="checkbox" value="{{$i}}"
+                                            id="size{{ $i }}" {{ request('size') == 'price' ? 'checked' : '' }}>
                                         <label class="form-check-label stretched-link"
                                             for="size{{ $i }}">Size
                                             {{ $i }}</label>
+                                    </li>
+                                @endfor
+                            </ul> --}}
+                            <ul class="list-group cursor-pointer" id="collapseSize" data-bs-parent="#accordion">
+                                @for ($i = 39; $i <= 43; $i++)
+                                    <li class="list-group-item px-0 py-1 border-0" style="font-size: 14px">
+                                        <input class="form-check-input me-1 checkbox" type="checkbox" name="size[]" value="{{ $i }}"
+                                            id="size{{ $i }}" {{ in_array($i, (array) request('size', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label stretched-link" for="size{{ $i }}">Size {{ $i }}</label>
                                     </li>
                                 @endfor
                             </ul>

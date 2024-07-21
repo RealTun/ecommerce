@@ -15,6 +15,12 @@ class Product extends Model
   {
     return $this->belongsTo(ProductBrand::class, 'brand_id', 'id');
   }
+
+  public function inventories()
+    {
+        return $this->hasMany(ProductInventory::class);
+    }
+
   public function getPriceAttribute($value)
   {
     $adjustedPrice = $value * 3000;

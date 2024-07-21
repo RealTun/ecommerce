@@ -121,6 +121,20 @@
                 margin: 10px 0;
             }
         }
+
+        .product-label {
+            position: absolute;
+            z-index: 999;
+            background-color: #cc041a;
+            padding: 5px;
+            margin-top: 5px;
+            font-size: 11px;
+        }
+
+        .product-label span {
+            font-weight: 700;
+            color: white;
+        }
     </style>
 @endpush
 
@@ -165,6 +179,11 @@
                                 @foreach ($products as $product)
                                     <div class="col-md-3">
                                         <div class="product-layout border">
+                                            @if ($product->sale != 0)
+                                                <div class="product-label">
+                                                    <span>⭐ SIÊU SALE ⭐</span>
+                                                </div>
+                                            @endif
                                             <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
                                                 class="img-product d-block position-relative">
                                                 <img loading="lazy"
@@ -262,15 +281,13 @@
                     let pageNumber = null;
                     let newUrl = null;
 
-                    if($(this).attr('aria-label') == "Previous"){
+                    if ($(this).attr('aria-label') == "Previous") {
                         let tempUrl = $(this).attr('href');
                         pageNumber = tempUrl.charAt(tempUrl.length - 1);
-                    }
-                    else if ($(this).attr('aria-label') == "Next"){
+                    } else if ($(this).attr('aria-label') == "Next") {
                         let tempUrl = $(this).attr('href');
                         pageNumber = tempUrl.charAt(tempUrl.length - 1);
-                    }
-                    else{
+                    } else {
                         pageNumber = $(this).text();
                     }
 

@@ -37,7 +37,7 @@ class WebController extends Controller
     $products = app(Pipeline::class)
             ->send(Product::query())
             ->through([
-                // \App\Filters\PaginationFilter::class,
+                \App\Filters\SizeFilter::class,
                 \App\Filters\SortFilter::class, // Add the sort filter here
             ])
             ->thenReturn();

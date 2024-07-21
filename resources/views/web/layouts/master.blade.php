@@ -43,6 +43,7 @@
         <footer style="background-color: #0f3057; color: white">
             @include('web.layouts.footer')
         </footer>
+        @include('web.layouts.scroll')
     </div>
     <div id="cover-spin"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
