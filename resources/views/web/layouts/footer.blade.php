@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-check d-flex px-0">
                             <input class="form-check-input-sm" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-label mt-2 mx-2" style="font-size: 13px" for="flexCheckChecked">
+                            <label class="form-label mt-2 mx-2 text-white" style="font-size: 13px" for="flexCheckChecked">
                                 Tôi đã đọc và đồng ý với
                                 <a href="" class="link-light fw-bold">Chính sách bảo mật</a>
                             </label>

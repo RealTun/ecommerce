@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
 {
@@ -31,8 +32,13 @@ class WebController extends Controller
     $pageSize = 12;
     $count_page = ceil($brand->products()->count() / $pageSize);
 
+    if($count_page == 0){
+      Session::flash('page_error', "Hiện tại không có sản phẩm nào phù hợp!");
+      return view('web.products.index', compact('brand', 'count_page', 'pageNumber'));
+    }
+
     if($pageNumber < 1 || $pageNumber > $count_page){
-      return redirect()->route('web.error');
+      return view('web.home.404');
     }
 
     // get data

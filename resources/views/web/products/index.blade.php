@@ -176,47 +176,51 @@
                         </div>
                         <div class="product-content">
                             <div class="row g-0 pt-4">
-                                @foreach ($products as $product)
-                                    <div class="col-md-3">
-                                        <div class="product-layout border">
-                                            @if ($product->sale != 0)
-                                                <div class="product-label">
-                                                    <span>⭐ SIÊU SALE ⭐</span>
-                                                </div>
-                                            @endif
-                                            <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
-                                                class="img-product d-block position-relative">
-                                                <img loading="lazy"
-                                                    srcset="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
-                                                    class="object-fit-cover w-100 h-100" alt="shoes">
-                                                <div class="bottom-bar"></div>
-                                            </a>
-                                            <div class="brand">
-                                                <a href="">{{ $product->brand->name }}</a>
-                                            </div>
-                                            <div class="caption text-center py-3" style="font-size: 13px">
-                                                <a href="#"
-                                                    class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
-                                                @if ($product->sale == 0)
-                                                    <span class="price fw-bold mt-2">
-                                                        {{ $product->price }}
-                                                    </span>
-                                                @else
-                                                    <span class="price text-danger fw-bold mt-2">
-                                                        {{ $product->priceAfterSale }}
-                                                    </span>
-                                                    <span
-                                                        class="price text-secondary fw-medium mt-2 text-decoration-line-through">
-                                                        {{ $product->price }}
-                                                    </span>
+                                @if (session('page_error'))
+                                    <div class="text-center text-danger text-monospace">{{session('page_error')}}</div>
+                                @else
+                                    @foreach ($products as $product)
+                                        <div class="col-md-3">
+                                            <div class="product-layout border">
+                                                @if ($product->sale != 0)
+                                                    <div class="product-label">
+                                                        <span>⭐ SIÊU SALE ⭐</span>
+                                                    </div>
                                                 @endif
+                                                <a href="{{ route('web.detailsProduct', [$brand->slug, $product->id]) }}"
+                                                    class="img-product d-block position-relative">
+                                                    <img loading="lazy"
+                                                        srcset="https://ik.imagekit.io/b78avuku4/{{ $product->path }}"
+                                                        class="object-fit-cover w-100 h-100" alt="shoes">
+                                                    <div class="bottom-bar"></div>
+                                                </a>
+                                                <div class="brand">
+                                                    <a href="">{{ $product->brand->name }}</a>
+                                                </div>
+                                                <div class="caption text-center py-3" style="font-size: 13px">
+                                                    <a href="#"
+                                                        class="name text-secondary-emphasis text-decoration-none">{{ $product->name }}</a>
+                                                    @if ($product->sale == 0)
+                                                        <span class="price fw-bold mt-2">
+                                                            {{ $product->price }}
+                                                        </span>
+                                                    @else
+                                                        <span class="price text-danger fw-bold mt-2">
+                                                            {{ $product->priceAfterSale }}
+                                                        </span>
+                                                        <span
+                                                            class="price text-secondary fw-medium mt-2 text-decoration-line-through">
+                                                            {{ $product->price }}
+                                                        </span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
-                        <div class="demo mt-2 d-flex justify-content-end">
+                        <div class="pagination-block mt-2 d-flex justify-content-end">
                             <nav class="pagination-outer" aria-label="Page navigation">
                                 <ul class="pagination">
                                     @if ($pageNumber > 1)
@@ -294,6 +298,11 @@
                     newUrl = currentUrl.replace(/(page=)\d+/, '$1' + pageNumber);
                     window.location.href = newUrl; // Redirect to the updated URL
                 });
+
+                // session error
+                // let errorMessage = '{{ session('page_error') }}';
+                // $('.pagination-block').hide(0);
+                // $('.product-content').next().hide(0);
             });
         </script>
     @endpush
